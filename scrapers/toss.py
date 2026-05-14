@@ -7,10 +7,11 @@ class TossScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        # 토스 로그인: placeholder 기반 (스크린샷 확인 완료)
-        await self.page.wait_for_selector("input[placeholder='이메일']", timeout=15000)
-        await self.page.fill("input[placeholder='이메일']", self.config["id"])
-        await self.page.fill("input[placeholder='비밀번호']", self.config["password"])
+        # placeholder 속성 없음 → 순서로 접근
+        await self.page.wait_for_selector("input", timeout=15000)
+        inputs = self.page.locator("input")
+        await inputs.nth(0).fill(self.config["id"])
+        await inputs.nth(1).fill(self.config["password"])
         await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 

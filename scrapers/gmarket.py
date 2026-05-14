@@ -3,24 +3,25 @@ from .base import BaseScraper
 
 class GmarketScraper(BaseScraper):
     async def login(self):
-        # ESM+ 로그인: /Member/SignIn 은 404 → 메인에서 로그인 폼 접근
         await self.page.goto("https://www.esmplus.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
+        # 아이디/비밀번호 입력 (스크린샷 확인: 입력까지는 성공)
         await self.page.wait_for_selector(
-            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디'], input[placeholder*='ID']",
+            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디']",
             timeout=15000
         )
         await self.page.fill(
-            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디'], input[placeholder*='ID']",
+            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디']",
             self.config["id"]
         )
         await self.page.fill(
             "#txtMemberPWD, input[name='memberPWD'], input[type='password']",
             self.config["password"]
         )
-        await self.page.click("#btnLogin, button[type='submit'], input[type='submit']")
+        # 스크린샷 확인: 로그인 버튼은 button:has-text('로그인')
+        await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
