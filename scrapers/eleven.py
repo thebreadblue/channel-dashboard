@@ -3,14 +3,22 @@ from .base import BaseScraper
 
 class ElevenStreetScraper(BaseScraper):
     async def login(self):
-        await self.page.goto("https://soffice.11st.co.kr/view/main", timeout=60000)
+        # 11번가 셀러오피스 직접 로그인 URL
+        await self.page.goto("https://soffice.11st.co.kr/view/login", timeout=60000)
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        await self.page.wait_for_selector("#sellerId, input[name='sellerId']", timeout=20000)
-        await self.page.fill("#sellerId, input[name='sellerId']", self.config["id"])
-        await self.page.fill("#sellerPwd, input[name='sellerPwd']", self.config["password"])
-        await self.page.click("#loginBtn, button[type='submit'], .btn_login")
+        # 홈페이지로 리다이렉트된 경우 로그인 링크 찾기
+        if "login" not in self.page.url and "main" not in self.page.url:
+            login_link = await self.page.query_selector("a[href*='login'], .btn_login, a:has-text('로그인')")
+            if login_link:
+                await login_link.click()
+                await self.page.wait_for_load_state("domcontentloaded")
+
+        await self.page.wait_for_selector("input[name='sellerId'], #sellerId, input[placeholder*='아이디']", timeout=20000)
+        await self.page.fill("input[name='sellerId'], #sellerId, input[placeholder*='아이디']", self.config["id"])
+        await self.page.fill("input[name='sellerPwd'], #sellerPwd, input[type='password']", self.config["password"])
+        await self.page.click("#loginBtn, button[type='submit'], .btn_login, input[type='submit']")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):

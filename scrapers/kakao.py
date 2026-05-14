@@ -7,10 +7,11 @@ class KakaoScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        await self.page.wait_for_selector("#loginKey--1, #loginKey, input[name='loginKey']", timeout=15000)
-        await self.page.fill("#loginKey--1, #loginKey, input[name='loginKey']", self.config["id"])
-        await self.page.fill("#password--2, #password, input[name='password']", self.config["password"])
-        await self.page.click(".btn_g.btn_confirm, button[type='submit']")
+        # 카카오 로그인: ID 없이 placeholder로 식별
+        await self.page.wait_for_selector("input[placeholder*='카카오메일'], input[placeholder*='아이디'], input[placeholder*='이메일']", timeout=15000)
+        await self.page.fill("input[placeholder*='카카오메일'], input[placeholder*='아이디'], input[placeholder*='이메일']", self.config["id"])
+        await self.page.fill("input[type='password'], input[placeholder*='비밀번호']", self.config["password"])
+        await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):

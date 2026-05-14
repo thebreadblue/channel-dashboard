@@ -7,17 +7,11 @@ class TossScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        email_sel = "input[type='email'], input[placeholder*='이메일'], input[placeholder*='아이디']"
-        await self.page.wait_for_selector(email_sel, timeout=15000)
-        await self.page.fill(email_sel, self.config["id"])
-
-        next_btn = await self.page.query_selector("button:has-text('다음'), button:has-text('계속')")
-        if next_btn:
-            await next_btn.click()
-            await self.page.wait_for_timeout(1500)
-
-        await self.page.fill("input[type='password']", self.config["password"])
-        await self.page.click("button[type='submit'], button:has-text('로그인')")
+        # 토스 로그인: placeholder 기반 (스크린샷 확인 완료)
+        await self.page.wait_for_selector("input[placeholder='이메일']", timeout=15000)
+        await self.page.fill("input[placeholder='이메일']", self.config["id"])
+        await self.page.fill("input[placeholder='비밀번호']", self.config["password"])
+        await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):

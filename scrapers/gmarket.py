@@ -3,14 +3,24 @@ from .base import BaseScraper
 
 class GmarketScraper(BaseScraper):
     async def login(self):
-        await self.page.goto("https://www.esmplus.com/Member/SignIn")
+        # ESM+ 로그인: /Member/SignIn 은 404 → 메인에서 로그인 폼 접근
+        await self.page.goto("https://www.esmplus.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        await self.page.wait_for_selector("#txtMemberID, #txtLoginID", timeout=15000)
-        await self.page.fill("#txtMemberID, #txtLoginID", self.config["id"])
-        await self.page.fill("#txtMemberPWD, #txtLoginPWD", self.config["password"])
-        await self.page.click("#btnLogin")
+        await self.page.wait_for_selector(
+            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디'], input[placeholder*='ID']",
+            timeout=15000
+        )
+        await self.page.fill(
+            "#txtMemberID, input[name='memberID'], input[placeholder*='아이디'], input[placeholder*='ID']",
+            self.config["id"]
+        )
+        await self.page.fill(
+            "#txtMemberPWD, input[name='memberPWD'], input[type='password']",
+            self.config["password"]
+        )
+        await self.page.click("#btnLogin, button[type='submit'], input[type='submit']")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):

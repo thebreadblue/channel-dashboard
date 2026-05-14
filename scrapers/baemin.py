@@ -7,20 +7,17 @@ class BaeminScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        await self.page.wait_for_selector(
-            "input[type='email'], input[name='email'], input[placeholder*='이메일'], input[placeholder*='아이디']",
-            timeout=15000
-        )
-        await self.page.fill(
-            "input[type='email'], input[name='email'], input[placeholder*='이메일'], input[placeholder*='아이디']",
-            self.config["id"]
-        )
+        # 스크린샷 확인: "협력업체 직원 로그인 (ID/PW)" 버튼이 먼저 나옴
+        await self.page.wait_for_selector("button:has-text('협력업체 직원 로그인')", timeout=15000)
+        await self.page.click("button:has-text('협력업체 직원 로그인')")
+        await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(2000)
+
+        await self.page.wait_for_selector("input[type='text'], input[name='username'], input[placeholder*='아이디']", timeout=15000)
+        await self.page.fill("input[type='text'], input[name='username'], input[placeholder*='아이디']", self.config["id"])
         await self.page.fill("input[type='password']", self.config["password"])
         await self.page.click("button[type='submit'], button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
-
-        if "verify" in self.page.url or "otp" in self.page.url:
-            raise Exception("2차 인증 필요")
 
     async def get_orders(self):
         await self.page.goto("https://scm-mart.baemin.com/order/list")

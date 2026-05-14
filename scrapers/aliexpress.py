@@ -3,22 +3,21 @@ from .base import BaseScraper
 
 class AliexpressScraper(BaseScraper):
     async def login(self):
-        await self.page.goto("https://sell.aliexpress.com")
+        # 알리익스프레스 셀러 로그인 직접 URL
+        await self.page.goto("https://login.aliexpress.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(3000)
 
-        login_btn = await self.page.query_selector("a[href*='login'], button:has-text('Sign In')")
-        if login_btn:
-            await login_btn.click()
-            await self.page.wait_for_load_state("domcontentloaded")
-            await self.page.wait_for_timeout(2000)
-
         await self.page.wait_for_selector(
-            "#fm-login-id, input[name='loginId'], input[name='account']", timeout=20000
+            "#fm-login-id, input[name='loginId'], input[placeholder*='Email'], input[placeholder*='email']",
+            timeout=20000
         )
-        await self.page.fill("#fm-login-id, input[name='loginId'], input[name='account']", self.config["id"])
-        await self.page.fill("#fm-login-password, input[name='password']", self.config["password"])
-        await self.page.click("#fm-login-submit, button[type='submit']")
+        await self.page.fill(
+            "#fm-login-id, input[name='loginId'], input[placeholder*='Email'], input[placeholder*='email']",
+            self.config["id"]
+        )
+        await self.page.fill("#fm-login-password, input[name='password'], input[type='password']", self.config["password"])
+        await self.page.click("#fm-login-submit, button[type='submit'], .fm-btn")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
