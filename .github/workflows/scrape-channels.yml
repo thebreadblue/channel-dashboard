@@ -50,13 +50,12 @@ jobs:
           COUPANG_PW: ${{ secrets.COUPANG_PW }}
           KURLY_ID: ${{ secrets.KURLY_ID }}
           KURLY_PW: ${{ secrets.KURLY_PW }}
-        working-directory: "판매채널 확인"
         run: python main.py
 
       - name: 결과 커밋 & 푸시
         run: |
           git config user.name "Channel Bot"
           git config user.email "bot@thebreadblue.com"
-          git add "판매채널 확인/data/results.json"
+          git add "data/results.json"
           git diff --staged --quiet || git commit -m "chore: 판매채널 데이터 업데이트 $(date +'%Y-%m-%d %H:%M KST' -d '+9 hours')"
           git push
