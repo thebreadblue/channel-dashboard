@@ -84,9 +84,9 @@ def main():
         print(f"{RESULTS_PATH} 없음 — 알림 스킵")
         return
 
-    current = build_summary(current_data)
+    current = build_summary(current_data.get("channels", current_data))
     previous_data = load_json(SNAPSHOT_PATH)
-    previous = build_summary(previous_data) if previous_data else {}
+    previous = build_summary(previous_data.get("channels", previous_data)) if previous_data else {}
 
     changed = find_changed(current, previous)
     now_str = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST")
