@@ -1,0 +1,554 @@
+{
+  "channels": [
+    {
+      "name": "스마트스토어",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "Blue#08380",
+      "url": "https://sell.smartstore.naver.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "카카오",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue_@daum.net",
+      "password": "Blue#08380",
+      "url": "https://shopping-sell.kakao.com/hub",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "카카오 선물하기",
+      "category": "쇼핑몰",
+      "type": "",
+      "id": "thebreadblue_@daum.net",
+      "password": "Blue#08380",
+      "url": "",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "토스쇼핑",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "moon@thebreadblue.com",
+      "password": "blue170901?",
+      "url": "https://shopping-seller.toss.im/home",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "11번가 셀러오피스",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb0901",
+      "password": "blue649575!",
+      "url": "http://soffice.11st.co.kr/view/main",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "11번가 애드오피스",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb0901",
+      "password": "blue649575!",
+      "url": "https://adoffice.11st.co.kr/sellers/40652/dashboard",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "ESMPLUS(G마켓관리자)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "Blue170901@",
+      "url": "https://www.esmplus.com/Home",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "쿠팡서플라이어",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "blue0901??",
+      "url": "https://supplier.coupang.com",
+      "status": "active",
+      "note": "최규원 BM / 공급사A코드: A00177354"
+    },
+    {
+      "name": "리하베스트(쿠팡)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "reharvestshop2021",
+      "password": "reharvest0814!!",
+      "url": "https://supplier.coupang.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "SSG",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "0024776048",
+      "password": "bLUE08380@!",
+      "url": "https://po.ssgadm.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "SSG(사업자번호)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "503-88-00851",
+      "password": "Blue170901",
+      "url": "https://po.ssgadm.com",
+      "status": "active",
+      "note": "SSG.COM 통합 파트너오피스"
+    },
+    {
+      "name": "컬리(파트너포털)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "VD6469.01",
+      "password": "blue170901??",
+      "url": "https://partner.kurly.com",
+      "status": "active",
+      "note": "매주 금요일"
+    },
+    {
+      "name": "컬리(초이고야)",
+      "category": "쇼핑몰",
+      "type": "초이고야컬리",
+      "id": "VD6837.01",
+      "password": "choigoya123",
+      "url": "https://partner.kurly.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "SRM(마켓컬리발주시스템)",
+      "category": "발주시스템",
+      "type": "어드민(직접운영)",
+      "id": "5038800851",
+      "password": "Blue!08380",
+      "url": "https://srm.kurlycorp.kr/index.do",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "배민 SCM(B마트 발주)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "hrhwang@thebreadblue.com",
+      "password": "blue364364@",
+      "url": "https://scm-mart.baemin.com/",
+      "status": "active",
+      "note": "매주 목요일 15시 43분 발주 / 인증: 이메일 or 법인폰 010-5031-0732"
+    },
+    {
+      "name": "배민 PMS",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "",
+      "password": "",
+      "url": "https://market-pms.baemin.com/auth/login",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "우아한 협력사 포탈",
+      "category": "발주시스템",
+      "type": "어드민(직접운영)",
+      "id": "THEBREADBLUE",
+      "password": "Blue#08380!",
+      "url": "https://sign.woowahan.com/spLogin.do",
+      "status": "active",
+      "note": "길보근"
+    },
+    {
+      "name": "신세계상품운영시스템",
+      "category": "발주시스템",
+      "type": "어드민(직접운영)",
+      "id": "PBREAD1",
+      "password": "blue170901!",
+      "url": "https://emart.ecvan.co.kr/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "오아시스 셀러",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "Blue@08380",
+      "url": "https://www.oasis.co.kr:9886/order/seller/list",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "농협몰",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "Blue#08380",
+      "url": "https://www.nonghyupmall.com/",
+      "status": "active",
+      "note": "tbb0901"
+    },
+    {
+      "name": "신라호텔(반트)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "v0108029",
+      "password": "bLUE08380@!",
+      "url": "https://www.shillasrm.com/login.do",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "나라장터 종합쇼핑몰",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "blue364364!",
+      "url": "https://shop.g2b.go.kr/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "사방넷",
+      "category": "연동툴",
+      "type": "어드민(직접운영)",
+      "id": "tbbblue",
+      "password": "blue170901?",
+      "url": "https://www.sabangnet.co.kr/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "사방넷미니",
+      "category": "연동툴",
+      "type": "",
+      "id": "tbbbluemini",
+      "password": "blue170901?",
+      "url": "https://www.sbmini.co.kr/index.html",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "플레이오토",
+      "category": "연동툴",
+      "type": "",
+      "id": "jynam@thebreadblue.com",
+      "password": "bLUE!08380",
+      "url": "https://app.playauto.io/login.html",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "옥션",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "moon170901!",
+      "url": "",
+      "status": "active",
+      "note": "인증: (주)더브레드블루 / 01050310732"
+    },
+    {
+      "name": "와디즈",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "moon@thebreadblue.com",
+      "password": "blue@364",
+      "url": "https://www.wadiz.kr/web/main",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "알리익스프레스",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "Blue#08380",
+      "url": "https://sell.aliexpress.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "아이디어스",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "blue170901?",
+      "url": "https://www.idus.com/w/me",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "그립",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "blue170901?",
+      "url": "https://seller.grip.show/login/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "멸치쇼핑",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "blue170901!",
+      "url": "https://about-smelchi.com",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "씨엔티티마켓",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "tbb649575!",
+      "url": "https://eclogin.cafe24.com/Shop/",
+      "status": "active",
+      "note": "공급사로 접속 ID: cnttmarket"
+    },
+    {
+      "name": "하모니(NH pay / k멤버스 / Uzzim / 쇼핑이지)",
+      "category": "쇼핑몰",
+      "type": "어드민",
+      "id": "tbb@thebreadblue.com",
+      "password": "tbb649575!",
+      "url": "https://harmonycvm.com/login",
+      "status": "active",
+      "note": "오유내 MD"
+    },
+    {
+      "name": "내일식사(에프엔프레시)",
+      "category": "쇼핑몰",
+      "type": "어드민",
+      "id": "5038800851",
+      "password": "tbb649575!",
+      "url": "http://scm.fnfresh.co.kr/",
+      "status": "active",
+      "note": "이지연 프로 / 주문·송장 처리 시 사용"
+    },
+    {
+      "name": "더농부마켓",
+      "category": "쇼핑몰",
+      "type": "어드민",
+      "id": "ko_dbb",
+      "password": "!koharu2502612",
+      "url": "https://www.sabangnet.co.kr/",
+      "status": "active",
+      "note": "곽동원 매니저 / 주문·송장 처리 시 사용"
+    },
+    {
+      "name": "채식한끼",
+      "category": "쇼핑몰",
+      "type": "어드민",
+      "id": "thebreadblue",
+      "password": "thebreadblue1234",
+      "url": "https://hanggi.kr/_manage/",
+      "status": "active",
+      "note": "장현지 MD"
+    },
+    {
+      "name": "왓섭",
+      "category": "쇼핑몰",
+      "type": "어드민",
+      "id": "인증 핸드폰 번호로 로그인",
+      "password": "",
+      "url": "https://partners.whatssub.co/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "프립",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "blue170901?",
+      "url": "",
+      "status": "active",
+      "note": "수수료 20%"
+    },
+    {
+      "name": "맛군",
+      "category": "쇼핑몰",
+      "type": "",
+      "id": "sup9425",
+      "password": "sup9425",
+      "url": "https://vms5.cafe24.com/admin/login.php",
+      "status": "active",
+      "note": "업무폰 문자 받으면 발주확인"
+    },
+    {
+      "name": "이데이몰",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "eE00258",
+      "password": "bLUE!08380",
+      "url": "http://scm.edaymall.com:8087/uat/uia/actionMain.do",
+      "status": "미사용",
+      "note": "업체코드: E00258"
+    },
+    {
+      "name": "롯데마트 협력사포털",
+      "category": "발주시스템",
+      "type": "",
+      "id": "사업자명/사업자번호",
+      "password": "blue170901!",
+      "url": "https://srm.lcn.co.kr/ko/ou/srm/launching/request/login",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "롯데마트 전자계약사이트",
+      "category": "발주시스템",
+      "type": "",
+      "id": "tbbblue",
+      "password": "blue170901?",
+      "url": "https://ecs.lcn.co.kr/web/mainForm.do",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "롯데이노베이트 SCE 포털",
+      "category": "발주시스템",
+      "type": "",
+      "id": "tbb0723",
+      "password": "Blue170901!",
+      "url": "https://www.lcn.co.kr",
+      "status": "active",
+      "note": "회사 아이디 m9001750"
+    },
+    {
+      "name": "롯데마트 전자계산서",
+      "category": "발주시스템",
+      "type": "",
+      "id": "lm5038800851",
+      "password": "blue170901!",
+      "url": "https://www.safebill.co.kr/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "엔로지스발주시스템(자사)",
+      "category": "발주시스템",
+      "type": "어드민(직접운영)",
+      "id": "Bblue",
+      "password": "Bblue03!",
+      "url": "",
+      "status": "active",
+      "note": "업체코드: nlogis16"
+    },
+    {
+      "name": "엔로지스발주시스템(일반)",
+      "category": "발주시스템",
+      "type": "어드민(직접운영)",
+      "id": "breadblue",
+      "password": "0901",
+      "url": "http://nlogis.com/",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "자사몰(카페24)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "bLUE08380!",
+      "url": "https://eclogin.cafe24.com/Shop/",
+      "status": "active",
+      "note": "카페24 ID: tbb2017 / PW: blue170901"
+    },
+    {
+      "name": "Hmall",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "503-88-00851",
+      "password": "blue170901?",
+      "url": "",
+      "status": "active",
+      "note": "help아이콘을 통해 접속"
+    },
+    {
+      "name": "홈앤쇼핑",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "",
+      "password": "",
+      "url": "",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "테무",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "",
+      "password": "",
+      "url": "",
+      "status": "active",
+      "note": ""
+    },
+    {
+      "name": "GS SHOP",
+      "category": "쇼핑몰",
+      "type": "",
+      "id": "1045262",
+      "password": "blue170901?",
+      "url": "GS SHOP - WithNet",
+      "status": "중단",
+      "note": ""
+    },
+    {
+      "name": "티몬",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "blue1030@",
+      "url": "https://spc.tmon.co.kr/member/login",
+      "status": "중단",
+      "note": ""
+    },
+    {
+      "name": "인터파크",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue",
+      "password": "tbb649575!",
+      "url": "https://seller.interpark.com/login",
+      "status": "중단",
+      "note": ""
+    },
+    {
+      "name": "롯데ON",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "thebreadblue00",
+      "password": "tbb170901?",
+      "url": "https://store.lotteon.com/cm/main/login_SO.wsp",
+      "status": "중단",
+      "note": ""
+    },
+    {
+      "name": "롯데ON(개인)",
+      "category": "쇼핑몰",
+      "type": "어드민(직접운영)",
+      "id": "tbb@thebreadblue.com",
+      "password": "moon170901!",
+      "url": "",
+      "status": "중단",
+      "note": ""
+    }
+  ]
+}

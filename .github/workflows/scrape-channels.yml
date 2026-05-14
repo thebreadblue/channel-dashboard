@@ -1,0 +1,62 @@
+name: 판매채널 데이터 수집
+
+on:
+  schedule:
+    - cron: "0 */1 * * *"   # 1시간마다 실행 (UTC 기준)
+  workflow_dispatch:          # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: 패키지 설치
+        run: pip install playwright
+
+      - name: Playwright 브라우저 설치
+        run: playwright install chromium --with-deps
+
+      - name: 판매채널 스크래핑 실행
+        env:
+          SMARTSTORE_ID: ${{ secrets.SMARTSTORE_ID }}
+          SMARTSTORE_PW: ${{ secrets.SMARTSTORE_PW }}
+          KAKAO_ID: ${{ secrets.KAKAO_ID }}
+          KAKAO_PW: ${{ secrets.KAKAO_PW }}
+          TOSS_ID: ${{ secrets.TOSS_ID }}
+          TOSS_PW: ${{ secrets.TOSS_PW }}
+          ELEVEN_ID: ${{ secrets.ELEVEN_ID }}
+          ELEVEN_PW: ${{ secrets.ELEVEN_PW }}
+          GMARKET_ID: ${{ secrets.GMARKET_ID }}
+          GMARKET_PW: ${{ secrets.GMARKET_PW }}
+          ALIEXPRESS_ID: ${{ secrets.ALIEXPRESS_ID }}
+          ALIEXPRESS_PW: ${{ secrets.ALIEXPRESS_PW }}
+          BAEMIN_ID: ${{ secrets.BAEMIN_ID }}
+          BAEMIN_PW: ${{ secrets.BAEMIN_PW }}
+          COUPANG_ID: ${{ secrets.COUPANG_ID }}
+          COUPANG_PW: ${{ secrets.COUPANG_PW }}
+          KURLY_ID: ${{ secrets.KURLY_ID }}
+          KURLY_PW: ${{ secrets.KURLY_PW }}
+        working-directory: "판매채널 확인"
+        run: python main.py
+
+      - name: 결과 커밋 & 푸시
+        run: |
+          git config user.name "Channel Bot"
+          git config user.email "bot@thebreadblue.com"
+          git add "판매채널 확인/data/results.json"
+          git diff --staged --quiet || git commit -m "chore: 판매채널 데이터 업데이트 $(date +'%Y-%m-%d %H:%M KST' -d '+9 hours')"
+          git push

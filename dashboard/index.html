@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>더브레드블루 판매채널 대시보드</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+    header h1 span { color: #f0b429; }
+
+    #last-updated {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    #refresh-btn {
+      background: #f0b429;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    #refresh-btn:hover { background: #d9a020; }
+
+    .summary-bar {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 12px 24px;
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+    }
+
+    .summary-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .summary-stat .label { font-size: 12px; color: #888; }
+    .summary-stat .value { font-size: 20px; font-weight: 700; }
+    .summary-stat .value.order { color: #2196f3; }
+    .summary-stat .value.inquiry { color: #ff9800; }
+    .summary-stat .value.review { color: #9c27b0; }
+
+    main { padding: 20px 24px; max-width: 1400px; margin: 0 auto; }
+
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      background: #e8e8e8;
+      border-radius: 8px;
+      padding: 4px;
+      width: fit-content;
+    }
+
+    .tab {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #666;
+      transition: all 0.15s;
+    }
+
+    .tab.active {
+      background: #fff;
+      color: #1a1a2e;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 16px;
+    }
+
+    .channel-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .channel-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+
+    .channel-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .channel-name-wrap { display: flex; align-items: center; gap: 10px; }
+
+    .channel-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .channel-name { font-size: 15px; font-weight: 700; }
+
+    .status-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .status-ok { background: #e8f5e9; color: #2e7d32; }
+    .status-error { background: #ffebee; color: #c62828; }
+
+    .admin-link {
+      font-size: 12px;
+      color: #2196f3;
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid #2196f3;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .admin-link:hover { background: #2196f3; color: #fff; }
+
+    .channel-stats {
+      display: flex;
+      padding: 12px 16px;
+      gap: 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .stat-item:not(:last-child) { border-right: 1px solid #f0f0f0; }
+
+    .stat-item .stat-val {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .stat-item .stat-label {
+      font-size: 10px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    .stat-item.order .stat-val { color: #2196f3; }
+    .stat-item.inquiry .stat-val { color: #ff9800; }
+    .stat-item.review .stat-val { color: #9c27b0; }
+
+    .channel-detail {
+      display: none;
+      padding: 0;
+    }
+
+    .channel-detail.open { display: block; }
+
+    .detail-section { border-top: 1px solid #f0f0f0; }
+
+    .detail-section-header {
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #666;
+      background: #fafafa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-row {
+      padding: 10px 16px;
+      border-top: 1px solid #f5f5f5;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .detail-row:first-of-type { border-top: none; }
+
+    .detail-row .row-label {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 2px;
+    }
+
+    .detail-row .row-content { color: #333; }
+
+    .no-data {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #bbb;
+      text-align: center;
+    }
+
+    .error-msg {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #c62828;
+      background: #ffebee;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px 24px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .channels-grid { grid-template-columns: 1fr; }
+      main { padding: 12px; }
+      header { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>더브레드블루 <span>판매채널</span></h1>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span id="last-updated">로딩 중...</span>
+    <button id="refresh-btn" onclick="loadData()">새로고침</button>
+  </div>
+</header>
+
+<div class="summary-bar" id="summary-bar"></div>
+
+<main>
+  <div class="tab-bar">
+    <button class="tab active" onclick="setTab('all', this)">전체</button>
+    <button class="tab" onclick="setTab('orders', this)">주문</button>
+    <button class="tab" onclick="setTab('inquiries', this)">문의</button>
+    <button class="tab" onclick="setTab('reviews', this)">리뷰</button>
+  </div>
+
+  <div id="channels-grid" class="channels-grid">
+    <div class="loading">데이터를 불러오는 중...</div>
+  </div>
+</main>
+
+<script>
+  const CHANNEL_COLORS = {
+    "스마트스토어": "#03c75a",
+    "카카오": "#fee500",
+    "토스쇼핑": "#0064ff",
+    "11번가": "#ff0000",
+    "G마켓(ESM+)": "#ea1917",
+    "알리익스프레스": "#ff6a00",
+    "배민": "#14c3af",
+    "쿠팡": "#e9163a",
+    "컬리": "#5f0080",
+  };
+
+  const CHANNEL_EMOJI = {
+    "스마트스토어": "N",
+    "카카오": "K",
+    "토스쇼핑": "T",
+    "11번가": "11",
+    "G마켓(ESM+)": "G",
+    "알리익스프레스": "A",
+    "배민": "B",
+    "쿠팡": "C",
+    "컬리": "M",
+  };
+
+  let currentTab = "all";
+  let allData = null;
+
+  // GitHub raw URL 또는 상대 경로에서 results.json 로드
+  async function loadData() {
+    const grid = document.getElementById("channels-grid");
+    grid.innerHTML = '<div class="loading">데이터를 불러오는 중...</div>';
+
+    try {
+      // 같은 레포 data/results.json 상대 경로 (GitHub Pages 배포 시)
+      const res = await fetch("../data/results.json?t=" + Date.now());
+      if (!res.ok) throw new Error("데이터 파일을 불러올 수 없습니다.");
+      allData = await res.json();
+      render();
+    } catch (e) {
+      grid.innerHTML = `<div class="loading" style="color:#c62828;">⚠️ ${e.message}<br><small>GitHub Pages 배포 후 data/results.json 파일이 필요합니다.</small></div>`;
+    }
+  }
+
+  function setTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    btn.classList.add("active");
+    if (allData) render();
+  }
+
+  function fmtTime(iso) {
+    if (!iso) return "-";
+    const d = new Date(iso);
+    return d.toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  }
+
+  function render() {
+    const channels = allData.channels || [];
+
+    // 요약 바
+    const totalOrders = channels.reduce((s, c) => s + (c.summary?.orders_new || 0), 0);
+    const totalInquiries = channels.reduce((s, c) => s + (c.summary?.inquiries_unanswered || 0), 0);
+    const totalReviews = channels.reduce((s, c) => s + (c.summary?.reviews_unanswered || 0), 0);
+
+    document.getElementById("summary-bar").innerHTML = `
+      <div class="summary-stat">
+        <span class="label">신규주문</span>
+        <span class="value order">${totalOrders}</span>
+      </div>
+      <div class="summary-stat">
+        <span class="label">미답변 문의</span>
+        <span class="value inquiry">${totalInquiries}</span>
+      </div>
+      <div class="summary-stat">
+        <span class="label">미답변 리뷰</span>
+        <span class="value review">${totalReviews}</span>
+      </div>
+      <div class="summary-stat" style="margin-left:auto;">
+        <span class="label">수집 시각</span>
+        <span style="font-size:13px;font-weight:600;">${fmtTime(allData.updated_at)}</span>
+      </div>
+    `;
+
+    document.getElementById("last-updated").textContent = fmtTime(allData.updated_at) + " 기준";
+
+    const grid = document.getElementById("channels-grid");
+    grid.innerHTML = "";
+
+    channels.forEach(ch => {
+      const color = CHANNEL_COLORS[ch.name] || "#607d8b";
+      const icon = CHANNEL_EMOJI[ch.name] || ch.name[0];
+      const isError = ch.status === "error";
+
+      // 탭 필터링 – 해당 탭 항목이 0이면 숨김
+      if (currentTab === "orders" && (ch.summary?.orders_new || 0) === 0 && !isError) return;
+      if (currentTab === "inquiries" && (ch.summary?.inquiries_unanswered || 0) === 0 && !isError) return;
+      if (currentTab === "reviews" && (ch.summary?.reviews_unanswered || 0) === 0 && !isError) return;
+
+      const card = document.createElement("div");
+      card.className = "channel-card";
+
+      card.innerHTML = `
+        <div class="channel-header">
+          <div class="channel-name-wrap">
+            <div class="channel-icon" style="background:${color}">${icon}</div>
+            <div>
+              <div class="channel-name">${ch.name}</div>
+              <span class="status-badge ${isError ? 'status-error' : 'status-ok'}">
+                ${isError ? "오류" : "정상"}
+              </span>
+            </div>
+          </div>
+          <a class="admin-link" href="${ch.url}" target="_blank">어드민 →</a>
+        </div>
+
+        <div class="channel-stats">
+          <div class="stat-item order" onclick="toggleDetail(this, 'orders')">
+            <div class="stat-val">${ch.summary?.orders_new ?? "-"}</div>
+            <div class="stat-label">신규주문</div>
+          </div>
+          <div class="stat-item inquiry" onclick="toggleDetail(this, 'inquiries')">
+            <div class="stat-val">${ch.summary?.inquiries_unanswered ?? "-"}</div>
+            <div class="stat-label">미답변 문의</div>
+          </div>
+          <div class="stat-item review" onclick="toggleDetail(this, 'reviews')">
+            <div class="stat-val">${ch.summary?.reviews_unanswered ?? "-"}</div>
+            <div class="stat-label">미답변 리뷰</div>
+          </div>
+        </div>
+
+        ${isError ? `<div class="error-msg">⚠️ ${ch.error || "수집 실패"}</div>` : ""}
+
+        <div class="channel-detail" id="detail-orders">
+          <div class="detail-section">
+            <div class="detail-section-header">신규 주문</div>
+            ${renderList(ch.orders, ["order_no", "product", "buyer"])}
+          </div>
+        </div>
+
+        <div class="channel-detail" id="detail-inquiries">
+          <div class="detail-section">
+            <div class="detail-section-header">미답변 문의</div>
+            ${renderList(ch.inquiries, ["product", "content"])}
+          </div>
+        </div>
+
+        <div class="channel-detail" id="detail-reviews">
+          <div class="detail-section">
+            <div class="detail-section-header">미답변 리뷰</div>
+            ${renderList(ch.reviews, ["product", "content", "rating"])}
+          </div>
+        </div>
+      `;
+
+      // 탭 활성 시 해당 섹션 자동 열기
+      if (currentTab === "orders") card.querySelector("#detail-orders").classList.add("open");
+      if (currentTab === "inquiries") card.querySelector("#detail-inquiries").classList.add("open");
+      if (currentTab === "reviews") card.querySelector("#detail-reviews").classList.add("open");
+
+      grid.appendChild(card);
+    });
+
+    if (grid.children.length === 0) {
+      grid.innerHTML = '<div class="loading">해당 항목이 없습니다.</div>';
+    }
+  }
+
+  function renderList(items, fields) {
+    if (!items || items.length === 0) return '<div class="no-data">없음</div>';
+    return items.map(item => {
+      const lines = fields
+        .filter(f => item[f])
+        .map(f => `<div class="row-content">${item[f]}</div>`)
+        .join("");
+      return `<div class="detail-row">${lines}</div>`;
+    }).join("");
+  }
+
+  function toggleDetail(statEl, type) {
+    const card = statEl.closest(".channel-card");
+    const detail = card.querySelector(`#detail-${type}`);
+    const isOpen = detail.classList.contains("open");
+
+    // 모두 닫기
+    card.querySelectorAll(".channel-detail").forEach(d => d.classList.remove("open"));
+
+    // 이미 열려 있으면 그냥 닫음, 아니면 열기
+    if (!isOpen) detail.classList.add("open");
+  }
+
+  loadData();
+</script>
+</body>
+</html>
