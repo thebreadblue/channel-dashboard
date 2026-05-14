@@ -1,0 +1,173 @@
+{
+  "updated_at": "2026-05-14T18:58:11.603698+09:00",
+  "channels": [
+    {
+      "name": "스마트스토어",
+      "url": "https://sell.smartstore.naver.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:55:47.023564+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "카카오",
+      "url": "https://shopping-sell.kakao.com/hub",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:55:57.806558+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "토스쇼핑",
+      "url": "https://shopping-seller.toss.im/home",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:56:20.815962+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "11번가",
+      "url": "http://soffice.11st.co.kr/view/main",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:57:26.451173+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [
+        {
+          "order_no": "0",
+          "product": "010-****-1030",
+          "status": "신규주문"
+        },
+        {
+          "order_no": "1",
+          "product": "010-****-0732",
+          "status": "신규주문"
+        }
+      ],
+      "inquiries": [
+        {
+          "product": "문*진",
+          "content": "010-****-1030",
+          "status": "미답변"
+        },
+        {
+          "product": "법*폰",
+          "content": "010-****-0732",
+          "status": "미답변"
+        }
+      ],
+      "reviews": [
+        {
+          "product": "문*진",
+          "content": "010-****-1030",
+          "status": "미답변"
+        },
+        {
+          "product": "법*폰",
+          "content": "010-****-0732",
+          "status": "미답변"
+        }
+      ]
+    },
+    {
+      "name": "G마켓(ESM+)",
+      "url": "https://www.esmplus.com/Home",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:57:34.490598+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "알리익스프레스",
+      "url": "https://sell.aliexpress.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:57:55.362246+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "배민",
+      "url": "https://scm-mart.baemin.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:58:07.080220+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "쿠팡",
+      "url": "https://supplier.coupang.com",
+      "status": "error",
+      "error": "쿠팡 WAF(Akamai) IP 차단 - GitHub Actions에서 자동 로그인 불가. 어드민에서 직접 확인하세요.",
+      "updated_at": "2026-05-14T18:58:07.157561+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "컬리",
+      "url": "https://partner.kurly.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T18:58:11.551166+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    }
+  ]
+}
