@@ -4,14 +4,21 @@ from .base import BaseScraper
 class TossScraper(BaseScraper):
     async def login(self):
         await self.page.goto("https://shopping-seller.toss.im/login")
-        await self.page.wait_for_load_state("domcontentloaded")
-        await self.page.wait_for_timeout(2000)
+        # SPA 완전 렌더링 대기
+        await self.page.wait_for_load_state("load")
+        await self.page.wait_for_timeout(3000)
 
-        # placeholder 속성 없음 → 순서로 접근
-        await self.page.wait_for_selector("input", timeout=15000)
-        inputs = self.page.locator("input")
-        await inputs.nth(0).fill(self.config["id"])
-        await inputs.nth(1).fill(self.config["password"])
+        # React 컴포넌트 마운트 후 input 대기
+        await self.page.wait_for_selector("input", timeout=20000)
+        await self.page.wait_for_timeout(500)
+
+        # click 후 keyboard.type 으로 입력 (fill이 안 먹히는 SPA 대응)
+        await self.page.locator("input").first.click()
+        await self.page.keyboard.type(self.config["id"])
+
+        await self.page.locator("input").nth(1).click()
+        await self.page.keyboard.type(self.config["password"])
+
         await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
