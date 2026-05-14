@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone, timedelta
 from abc import ABC, abstractmethod
 
@@ -54,6 +55,7 @@ class BaseScraper(ABC):
         )
         try:
             self.page = await context.new_page()
+            self.page.set_default_timeout(30000)
             await self.login()
             await self.get_orders()
             await self.get_inquiries()
@@ -62,6 +64,13 @@ class BaseScraper(ABC):
             self.result["status"] = "error"
             self.result["error"] = str(e)
             print(f"[{self.name}] 오류: {e}")
+            try:
+                os.makedirs("screenshots", exist_ok=True)
+                path = f"screenshots/{self.name}_error.png"
+                await self.page.screenshot(path=path, full_page=True)
+                print(f"[{self.name}] 스크린샷: {path}")
+            except Exception:
+                pass
         finally:
             self.result["updated_at"] = now_kst()
             await context.close()
