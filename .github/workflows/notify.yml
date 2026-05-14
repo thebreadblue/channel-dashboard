@@ -1,0 +1,33 @@
+name: Daily Google Chat Notification
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 매일 14:00 KST (= 05:00 UTC)
+  workflow_dispatch:       # 수동 실행 가능
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Send Google Chat notification
+        env:
+          GOOGLE_CHAT_WEBHOOK: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+        run: python notifier.py
+
+      - name: Commit snapshot update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          git add data/snapshot.json
+          git diff --staged --quiet || git commit -m "chore: update notification snapshot [skip ci]"
+          git push
