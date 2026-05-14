@@ -1,4 +1,140 @@
 {
-  "updated_at": null,
-  "channels": []
+  "updated_at": "2026-05-14T17:05:48.028654+09:00",
+  "channels": [
+    {
+      "name": "스마트스토어",
+      "url": "https://sell.smartstore.naver.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T17:02:06.287779+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "카카오",
+      "url": "https://shopping-sell.kakao.com/hub",
+      "status": "error",
+      "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name='loginKey'], input[type='email']\")\n",
+      "updated_at": "2026-05-14T17:02:40.208938+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "토스쇼핑",
+      "url": "https://shopping-seller.toss.im/home",
+      "status": "error",
+      "error": "Timeout 15000ms exceeded.",
+      "updated_at": "2026-05-14T17:03:01.618996+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "11번가",
+      "url": "http://soffice.11st.co.kr/view/main",
+      "status": "error",
+      "error": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://soffice.11st.co.kr/view/main\", waiting until \"load\"\n",
+      "updated_at": "2026-05-14T17:03:31.649004+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "G마켓(ESM+)",
+      "url": "https://www.esmplus.com/Home",
+      "status": "error",
+      "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#txtLoginID, input[name='id']\")\n",
+      "updated_at": "2026-05-14T17:04:02.838266+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "알리익스프레스",
+      "url": "https://sell.aliexpress.com",
+      "status": "error",
+      "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name='account'], input[type='email'], #fm-login-id\")\n",
+      "updated_at": "2026-05-14T17:04:35.016037+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "배민",
+      "url": "https://scm-mart.baemin.com",
+      "status": "error",
+      "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type='email'], input[name='email'], input[placeholder*='이메일']\")\n",
+      "updated_at": "2026-05-14T17:05:08.877538+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "쿠팡",
+      "url": "https://supplier.coupang.com",
+      "status": "error",
+      "error": "Page.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[name='username'], input[type='text'], #username\")\n    - waiting for\" https://supplier.coupang.com/logout?returnUrl=https%3A%2F%2Fsupplier.coupang.com%2Flogin\" navigation to finish...\n    - navigated to \"https://xauth.coupang.com/auth/realms/seller/protocol/openid-connect/auth?response_type=code&client_id=supplier-hub&scope=openid&state=tVl2sUvFSYu4YA3-WQZmwHblKeQplcDEt3ZO7SccY68%3D&redirect_uri=http…\"\n",
+      "updated_at": "2026-05-14T17:05:42.929455+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "컬리",
+      "url": "https://partner.kurly.com",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-14T17:05:47.988410+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    }
+  ]
 }
