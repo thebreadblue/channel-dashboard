@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-05-16T05:50:10.993434+09:00",
+  "updated_at": "2026-05-16T09:10:11.180489+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:47:46.521924+09:00",
+      "updated_at": "2026-05-16T09:07:18.328059+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -21,7 +21,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:47:57.048383+09:00",
+      "updated_at": "2026-05-16T09:07:36.430461+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -36,7 +36,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:48:20.433532+09:00",
+      "updated_at": "2026-05-16T09:08:01.706642+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -51,7 +51,7 @@
       "url": "http://soffice.11st.co.kr/view/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:49:25.007960+09:00",
+      "updated_at": "2026-05-16T09:09:20.391406+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -99,7 +99,7 @@
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:49:33.212958+09:00",
+      "updated_at": "2026-05-16T09:09:30.078538+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -114,7 +114,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:49:54.118036+09:00",
+      "updated_at": "2026-05-16T09:09:52.573245+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -129,7 +129,7 @@
       "url": "https://scm-mart.baemin.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:50:06.176431+09:00",
+      "updated_at": "2026-05-16T09:10:05.591768+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -144,7 +144,7 @@
       "url": "https://supplier.coupang.com",
       "status": "error",
       "error": "쿠팡 WAF(Akamai) IP 차단 - GitHub Actions에서 자동 로그인 불가. 어드민에서 직접 확인하세요.",
-      "updated_at": "2026-05-16T05:50:06.257057+09:00",
+      "updated_at": "2026-05-16T09:10:05.659170+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -159,7 +159,7 @@
       "url": "https://partner.kurly.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-16T05:50:10.948149+09:00",
+      "updated_at": "2026-05-16T09:10:11.144781+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
