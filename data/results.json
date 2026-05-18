@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-05-18T22:01:36.631364+09:00",
+  "updated_at": "2026-05-19T04:18:01.437962+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T21:58:54.520944+09:00",
+      "updated_at": "2026-05-19T04:15:14.273468+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -21,7 +21,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T21:59:13.786977+09:00",
+      "updated_at": "2026-05-19T04:15:26.100666+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -36,7 +36,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T21:59:38.695373+09:00",
+      "updated_at": "2026-05-19T04:15:50.275805+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -49,24 +49,57 @@
     {
       "name": "11번가",
       "url": "http://soffice.11st.co.kr/view/main",
-      "status": "error",
-      "error": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://soffice.11st.co.kr/view/login\", waiting until \"load\"\n",
-      "updated_at": "2026-05-18T22:00:39.664313+09:00",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-19T04:17:06.991310+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
         "reviews_unanswered": 0
       },
-      "orders": [],
-      "inquiries": [],
-      "reviews": []
+      "orders": [
+        {
+          "order_no": "0",
+          "product": "010-****-1030",
+          "status": "신규주문"
+        },
+        {
+          "order_no": "1",
+          "product": "010-****-0732",
+          "status": "신규주문"
+        }
+      ],
+      "inquiries": [
+        {
+          "product": "문*진",
+          "content": "010-****-1030",
+          "status": "미답변"
+        },
+        {
+          "product": "법*폰",
+          "content": "010-****-0732",
+          "status": "미답변"
+        }
+      ],
+      "reviews": [
+        {
+          "product": "문*진",
+          "content": "010-****-1030",
+          "status": "미답변"
+        },
+        {
+          "product": "법*폰",
+          "content": "010-****-0732",
+          "status": "미답변"
+        }
+      ]
     },
     {
       "name": "G마켓(ESM+)",
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T22:00:50.134234+09:00",
+      "updated_at": "2026-05-19T04:17:16.585423+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -81,7 +114,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T22:01:14.109222+09:00",
+      "updated_at": "2026-05-19T04:17:41.081606+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -96,7 +129,7 @@
       "url": "https://scm-mart.baemin.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T22:01:28.295916+09:00",
+      "updated_at": "2026-05-19T04:17:54.241029+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -111,7 +144,7 @@
       "url": "https://supplier.coupang.com",
       "status": "error",
       "error": "쿠팡 WAF(Akamai) IP 차단 - GitHub Actions에서 자동 로그인 불가. 어드민에서 직접 확인하세요.",
-      "updated_at": "2026-05-18T22:01:28.380932+09:00",
+      "updated_at": "2026-05-19T04:17:54.324536+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -126,7 +159,7 @@
       "url": "https://partner.kurly.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-18T22:01:36.576926+09:00",
+      "updated_at": "2026-05-19T04:18:01.392802+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
