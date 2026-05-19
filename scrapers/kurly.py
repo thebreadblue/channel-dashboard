@@ -26,12 +26,15 @@ class KurlyScraper(BaseScraper):
         await self.page.screenshot(path="screenshots/컬리_after_login.png", full_page=True)
 
     async def get_orders(self):
-        await self.page.goto("https://partner.kurly.com/#/order/list")
-        await self.page.wait_for_load_state("networkidle", timeout=15000)
+        today = self.today_kst()
+        await self.page.goto(f"https://partner.kurly.com/#/order/list?startDate={today}&endDate={today}")
+        await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
 
         count = await self.safe_int(".total-count, .count, [class*='count']")
         self.result["summary"]["orders_new"] = count
-
         rows = await self.page.query_selector_all("tbody tr, [class*='order-item']")
         for row in rows[:10]:
             cells = await row.query_selector_all("td")
@@ -43,12 +46,14 @@ class KurlyScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://partner.kurly.com/#/cs/inquiry")
-        await self.page.wait_for_load_state("networkidle", timeout=15000)
+        today = self.today_kst()
+        await self.page.goto(f"https://partner.kurly.com/#/cs/inquiry?startDate={today}&endDate={today}")
+        await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
 
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["inquiries_unanswered"] = count
-
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
             cells = await row.query_selector_all("td")
@@ -59,12 +64,14 @@ class KurlyScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://partner.kurly.com/#/review/list")
-        await self.page.wait_for_load_state("networkidle", timeout=15000)
+        today = self.today_kst()
+        await self.page.goto(f"https://partner.kurly.com/#/review/list?startDate={today}&endDate={today}")
+        await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
 
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
-
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
             cells = await row.query_selector_all("td")

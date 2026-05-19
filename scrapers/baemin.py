@@ -7,7 +7,6 @@ class BaeminScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        # 스크린샷 확인: "협력업체 직원 로그인 (ID/PW)" 버튼이 먼저 나옴
         await self.page.wait_for_selector("button:has-text('협력업체 직원 로그인')", timeout=15000)
         await self.page.click("button:has-text('협력업체 직원 로그인')")
         await self.page.wait_for_load_state("domcontentloaded")
@@ -20,8 +19,13 @@ class BaeminScraper(BaseScraper):
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        await self.page.goto("https://scm-mart.baemin.com/order/list")
+        today = self.today_kst()
+        await self.page.goto(f"https://scm-mart.baemin.com/order/list?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int(".total-count, .count strong, [class*='count']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -35,8 +39,12 @@ class BaeminScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://scm-mart.baemin.com/cs/inquiry")
+        today = self.today_kst()
+        await self.page.goto(f"https://scm-mart.baemin.com/cs/inquiry?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -49,8 +57,12 @@ class BaeminScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://scm-mart.baemin.com/cs/review")
+        today = self.today_kst()
+        await self.page.goto(f"https://scm-mart.baemin.com/cs/review?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")

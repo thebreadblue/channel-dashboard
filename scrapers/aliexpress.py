@@ -3,12 +3,10 @@ from .base import BaseScraper
 
 class AliexpressScraper(BaseScraper):
     async def login(self):
-        # 알리익스프레스: 2단계 로그인 (이메일 → Continue → 비밀번호)
         await self.page.goto("https://login.aliexpress.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(3000)
 
-        # 1단계: 이메일 입력 후 Continue
         await self.page.wait_for_selector(
             "input[type='email'], input[type='text'], input[placeholder*='Email'], input[placeholder*='email'], input[placeholder*='phone']",
             timeout=20000
@@ -20,15 +18,22 @@ class AliexpressScraper(BaseScraper):
         await self.page.click("button:has-text('Continue'), button[type='submit']")
         await self.page.wait_for_timeout(2000)
 
-        # 2단계: 비밀번호 입력
         await self.page.wait_for_selector("input[type='password']", timeout=15000)
         await self.page.fill("input[type='password']", self.config["password"])
         await self.page.click("button:has-text('Sign in'), button:has-text('로그인'), button[type='submit']")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        await self.page.goto("https://sell.aliexpress.com/order/list.htm")
+        today = self.today_kst()
+        await self.page.goto(
+            f"https://sell.aliexpress.com/order/list.htm"
+            f"?status=0&startDate={today}&endDate={today}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -44,6 +49,8 @@ class AliexpressScraper(BaseScraper):
     async def get_inquiries(self):
         await self.page.goto("https://msg.aliexpress.com/buyerMsgList.htm")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.apply_date_filter()
+
         items = await self.page.query_selector_all("[class*='msg-item'], .message-item")
         self.result["summary"]["inquiries_unanswered"] = len(items)
         for item in items[:10]:
@@ -53,8 +60,15 @@ class AliexpressScraper(BaseScraper):
             })
 
     async def get_reviews(self):
-        await self.page.goto("https://sell.aliexpress.com/review/index.htm")
+        today = self.today_kst()
+        await self.page.goto(
+            f"https://sell.aliexpress.com/review/index.htm"
+            f"?startDate={today}&endDate={today}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int(".total-count, [class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")

@@ -3,12 +3,10 @@ from .base import BaseScraper
 
 class ElevenStreetScraper(BaseScraper):
     async def login(self):
-        # 11번가 셀러오피스 직접 로그인 URL
         await self.page.goto("https://soffice.11st.co.kr/view/login", timeout=60000)
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        # 홈페이지로 리다이렉트된 경우 로그인 링크 찾기
         if "login" not in self.page.url and "main" not in self.page.url:
             login_link = await self.page.query_selector("a[href*='login'], .btn_login, a:has-text('로그인')")
             if login_link:
@@ -22,8 +20,17 @@ class ElevenStreetScraper(BaseScraper):
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        await self.page.goto("https://soffice.11st.co.kr/view/order/orderList")
+        today = self.today_kst()
+        today_11 = today.replace("-", "")  # 11번가는 YYYYMMDD 형식
+        await self.page.goto(
+            f"https://soffice.11st.co.kr/view/order/orderList"
+            f"?startDt={today_11}&endDt={today_11}&orderStatus=NEW"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int(".total_count strong, #totalCnt")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -37,8 +44,16 @@ class ElevenStreetScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://soffice.11st.co.kr/view/cs/inquiryList")
+        today = self.today_kst()
+        today_11 = today.replace("-", "")
+        await self.page.goto(
+            f"https://soffice.11st.co.kr/view/cs/inquiryList"
+            f"?startDt={today_11}&endDt={today_11}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int(".total_count strong, #totalCnt")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -52,8 +67,16 @@ class ElevenStreetScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://soffice.11st.co.kr/view/review/buyReviewList")
+        today = self.today_kst()
+        today_11 = today.replace("-", "")
+        await self.page.goto(
+            f"https://soffice.11st.co.kr/view/review/buyReviewList"
+            f"?startDt={today_11}&endDt={today_11}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int(".total_count strong, #totalCnt")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")

@@ -7,7 +7,6 @@ class KakaoScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        # 카카오 로그인: ID 없이 placeholder로 식별
         await self.page.wait_for_selector("input[placeholder*='카카오메일'], input[placeholder*='아이디'], input[placeholder*='이메일']", timeout=15000)
         await self.page.fill("input[placeholder*='카카오메일'], input[placeholder*='아이디'], input[placeholder*='이메일']", self.config["id"])
         await self.page.fill("input[type='password'], input[placeholder*='비밀번호']", self.config["password"])
@@ -15,8 +14,13 @@ class KakaoScraper(BaseScraper):
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        await self.page.goto("https://shopping-sell.kakao.com/order/list")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-sell.kakao.com/order/list?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int("[class*='totalCount'], [class*='total-count'], .count")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -30,8 +34,12 @@ class KakaoScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://shopping-sell.kakao.com/inquiry/list")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-sell.kakao.com/inquiry/list?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("[class*='totalCount'], [class*='total-count']")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -44,8 +52,12 @@ class KakaoScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://shopping-sell.kakao.com/review/list")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-sell.kakao.com/review/list?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("[class*='totalCount'], [class*='total-count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")

@@ -7,7 +7,6 @@ class GmarketScraper(BaseScraper):
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
 
-        # 아이디/비밀번호 입력 (스크린샷 확인: 입력까지는 성공)
         await self.page.wait_for_selector(
             "#txtMemberID, input[name='memberID'], input[placeholder*='아이디']",
             timeout=15000
@@ -20,13 +19,20 @@ class GmarketScraper(BaseScraper):
             "#txtMemberPWD, input[name='memberPWD'], input[type='password']",
             self.config["password"]
         )
-        # 스크린샷 확인: 로그인 버튼은 button:has-text('로그인')
         await self.page.click("button:has-text('로그인')")
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        await self.page.goto("https://www.esmplus.com/Deliver/DeliverList?OrderStatus=1")
+        today = self.today_kst()
+        await self.page.goto(
+            f"https://www.esmplus.com/Deliver/DeliverList"
+            f"?OrderStatus=1&OrdBeginDt={today}&OrdEndDt={today}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int("#lblTotalCount, .count em, .total_count strong")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -40,8 +46,15 @@ class GmarketScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://www.esmplus.com/CS/CSList?AnsStatus=N")
+        today = self.today_kst()
+        await self.page.goto(
+            f"https://www.esmplus.com/CS/CSList"
+            f"?AnsStatus=N&BeginDt={today}&EndDt={today}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("#lblTotalCount, .count em")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -55,8 +68,15 @@ class GmarketScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://www.esmplus.com/Review/ReviewList?AnsStatus=N")
+        today = self.today_kst()
+        await self.page.goto(
+            f"https://www.esmplus.com/Review/ReviewList"
+            f"?AnsStatus=N&BeginDt={today}&EndDt={today}"
+        )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("#lblTotalCount, .count em")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")

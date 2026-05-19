@@ -30,6 +30,57 @@ class BaseScraper(ABC):
             "reviews": [],
         }
 
+    def today_kst(self) -> str:
+        return datetime.now(KST).strftime("%Y-%m-%d")
+
+    async def apply_date_filter(self):
+        """오늘 날짜 필터 UI 적용 — 날짜 input을 찾아 채우고 조회 버튼 클릭"""
+        today = self.today_kst()
+
+        # 시작 날짜
+        for sel in [
+            "input[type='date']",
+            "#startDate", "#fromDate", "#start_date", "#sdate",
+            "input[placeholder*='시작']", "input[placeholder*='from']",
+        ]:
+            el = await self.page.query_selector(sel)
+            if el:
+                await el.triple_click()
+                await el.fill(today)
+                break
+
+        # 종료 날짜 (시작과 별도 필드인 경우)
+        for sel in [
+            "#endDate", "#toDate", "#end_date", "#edate",
+            "input[placeholder*='종료']", "input[placeholder*='to']",
+        ]:
+            el = await self.page.query_selector(sel)
+            if el:
+                await el.triple_click()
+                await el.fill(today)
+                break
+
+        # 조회/검색 버튼
+        for sel in [
+            "button:has-text('조회')", "button:has-text('검색')",
+            ".btn-search", ".btn_search", "button:has-text('Search')",
+        ]:
+            el = await self.page.query_selector(sel)
+            if el:
+                await el.click()
+                await self.page.wait_for_timeout(2000)
+                break
+
+    async def screenshot(self, tag: str):
+        """디버그 스크린샷 저장"""
+        try:
+            os.makedirs("screenshots", exist_ok=True)
+            await self.page.screenshot(
+                path=f"screenshots/{self.name}_{tag}.png", full_page=True
+            )
+        except Exception:
+            pass
+
     @abstractmethod
     async def login(self):
         pass
@@ -65,10 +116,7 @@ class BaseScraper(ABC):
             self.result["error"] = str(e)
             print(f"[{self.name}] 오류: {e}")
             try:
-                os.makedirs("screenshots", exist_ok=True)
-                path = f"screenshots/{self.name}_error.png"
-                await self.page.screenshot(path=path, full_page=True)
-                print(f"[{self.name}] 스크린샷: {path}")
+                await self.screenshot("error")
             except Exception:
                 pass
         finally:

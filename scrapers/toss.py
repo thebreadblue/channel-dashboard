@@ -1,4 +1,3 @@
-import os
 from .base import BaseScraper
 
 
@@ -28,27 +27,23 @@ class TossScraper(BaseScraper):
         await self.page.wait_for_selector("input", timeout=20000)
         await self.page.wait_for_timeout(1000)
 
-        os.makedirs("screenshots", exist_ok=True)
-        await self.page.screenshot(path="screenshots/toss_before_fill.png")
-
         await self._fill_react_input(0, self.config["id"])
         await self.page.wait_for_timeout(500)
         await self._fill_react_input(1, self.config["password"])
         await self.page.wait_for_timeout(500)
 
-        await self.page.screenshot(path="screenshots/toss_after_fill.png")
-
         await self.page.click("button:has-text('로그인')")
-        # SPA는 networkidle에 도달하지 않을 수 있어 domcontentloaded + 대기로 처리
         await self.page.wait_for_load_state("domcontentloaded", timeout=20000)
         await self.page.wait_for_timeout(3000)
 
-        await self.page.screenshot(path="screenshots/toss_after_login.png")
-
     async def get_orders(self):
-        await self.page.goto("https://shopping-seller.toss.im/orders")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-seller.toss.im/orders?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("domcontentloaded")
-        await self.page.wait_for_timeout(4000)
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
+        await self.screenshot("orders")
+
         count = await self.safe_int("[class*='count'], [class*='badge']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -62,9 +57,12 @@ class TossScraper(BaseScraper):
                 })
 
     async def get_inquiries(self):
-        await self.page.goto("https://shopping-seller.toss.im/inquiries")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-seller.toss.im/inquiries?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("domcontentloaded")
-        await self.page.wait_for_timeout(4000)
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("[class*='count']")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
@@ -77,9 +75,12 @@ class TossScraper(BaseScraper):
                 })
 
     async def get_reviews(self):
-        await self.page.goto("https://shopping-seller.toss.im/reviews")
+        today = self.today_kst()
+        await self.page.goto(f"https://shopping-seller.toss.im/reviews?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("domcontentloaded")
-        await self.page.wait_for_timeout(4000)
+        await self.page.wait_for_timeout(3000)
+        await self.apply_date_filter()
+
         count = await self.safe_int("[class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
