@@ -1,7 +1,11 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CHANNEL_STATUS_DATA, type ChannelStatus } from "@/constants/omsMockData";
+import { fetchChannelOverrides, applyOverrides } from "@/lib/fetchChannelData";
 
 function StatPill({
   label,
@@ -33,7 +37,6 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
   return (
     <Card className="hover:shadow-md transition-shadow">
       <CardContent className="p-4 space-y-3">
-        {/* 채널 헤더 */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
@@ -54,7 +57,6 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
           </a>
         </div>
 
-        {/* 수치 */}
         <div className="flex items-center justify-around pt-1 pb-1 border-t border-slate-100">
           <StatPill label="신규주문" value={ch.newOrders} />
           <div className="w-px h-8 bg-slate-100" />
@@ -63,7 +65,6 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
           <StatPill label="문의" value={totalInquiries} />
         </div>
 
-        {/* 문의 유형 뱃지 */}
         {ch.inquiries.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {ch.inquiries.map((inq) => (
@@ -72,7 +73,9 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
                 variant={inq.count > 0 ? "default" : "secondary"}
                 className={`text-[10px] px-2 py-0.5 font-medium ${
                   inq.count > 0
-                    ? "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-50"
+                    ? inq.type === "수집오류"
+                      ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-50"
+                      : "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-50"
                     : "bg-slate-50 text-slate-400 border border-slate-100"
                 }`}
               >
@@ -87,15 +90,41 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
 }
 
 export function ChannelStatusGrid() {
+  const [channels, setChannels] = useState<ChannelStatus[]>(CHANNEL_STATUS_DATA);
+  const [updatedAt, setUpdatedAt] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchChannelOverrides().then((overrides) => {
+      if (Object.keys(overrides).length > 0) {
+        setChannels(applyOverrides(CHANNEL_STATUS_DATA, overrides));
+      }
+      setLoading(false);
+    });
+
+    fetch("https://raw.githubusercontent.com/thebreadblue/channel-dashboard/main/data/results.json", {
+      cache: "no-store",
+    })
+      .then((r) => r.json())
+      .then((d) => setUpdatedAt(d.updated_at ?? ""))
+      .catch(() => {});
+  }, []);
+
+  const subtitle = loading
+    ? "데이터 불러오는 중..."
+    : updatedAt
+    ? `최종 수집: ${new Date(updatedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}`
+    : "1시간마다 자동 갱신";
+
   return (
     <section className="space-y-4">
       <div>
         <h2 className="text-sm font-semibold text-slate-800">채널별 당일 현황</h2>
-        <p className="text-xs text-slate-400 mt-0.5">실시간 수집 기준 — 1시간마다 갱신</p>
+        <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-        {CHANNEL_STATUS_DATA.map((ch) => (
+        {channels.map((ch) => (
           <ChannelCard key={ch.id} ch={ch} />
         ))}
       </div>
