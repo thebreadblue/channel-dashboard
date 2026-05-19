@@ -1,15 +1,29 @@
+import os
 from .base import BaseScraper
 
 
 class KurlyScraper(BaseScraper):
     async def login(self):
-        await self.page.goto("https://partner.kurly.com")
+        await self.page.goto("https://partner.kurly.com/login")
         await self.page.wait_for_load_state("domcontentloaded")
+        await self.page.wait_for_timeout(2000)
 
-        await self.page.fill("input[name='username'], input[type='text'], input[placeholder*='아이디']", self.config["id"])
+        os.makedirs("screenshots", exist_ok=True)
+        await self.page.screenshot(path="screenshots/컬리_login_page.png", full_page=True)
+
+        await self.page.wait_for_selector(
+            "input[name='username'], input[type='text'], input[placeholder*='아이디'], input[placeholder*='이메일']",
+            timeout=15000
+        )
+        await self.page.fill(
+            "input[name='username'], input[type='text'], input[placeholder*='아이디'], input[placeholder*='이메일']",
+            self.config["id"]
+        )
         await self.page.fill("input[name='password'], input[type='password']", self.config["password"])
         await self.page.click("button[type='submit'], button:has-text('로그인'), .btn-login")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
+
+        await self.page.screenshot(path="screenshots/컬리_after_login.png", full_page=True)
 
     async def get_orders(self):
         await self.page.goto("https://partner.kurly.com/#/order/list")
