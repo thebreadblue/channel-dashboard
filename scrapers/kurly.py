@@ -4,25 +4,31 @@ from .base import BaseScraper
 
 class KurlyScraper(BaseScraper):
     async def login(self):
-        await self.page.goto("https://partner.kurly.com/login")
+        # 루트로 이동해서 리다이렉트 따라가기
+        await self.page.goto("https://partner.kurly.com")
         await self.page.wait_for_load_state("domcontentloaded")
-        await self.page.wait_for_timeout(2000)
+        await self.page.wait_for_timeout(3000)
 
         os.makedirs("screenshots", exist_ok=True)
         await self.page.screenshot(path="screenshots/컬리_login_page.png", full_page=True)
 
-        await self.page.wait_for_selector(
-            "input[name='username'], input[type='text'], input[placeholder*='아이디'], input[placeholder*='이메일']",
-            timeout=15000
-        )
-        await self.page.fill(
-            "input[name='username'], input[type='text'], input[placeholder*='아이디'], input[placeholder*='이메일']",
-            self.config["id"]
-        )
-        await self.page.fill("input[name='password'], input[type='password']", self.config["password"])
-        await self.page.click("button[type='submit'], button:has-text('로그인'), .btn-login")
-        await self.page.wait_for_load_state("networkidle", timeout=15000)
+        # 컬리 파트너: email 또는 ID 필드 (더 넓은 셀렉터)
+        await self.page.wait_for_selector("input", timeout=20000)
+        await self.page.wait_for_timeout(500)
 
+        # 첫 번째 input에 ID/이메일 입력
+        inputs = await self.page.query_selector_all("input")
+        if len(inputs) >= 1:
+            await inputs[0].click()
+            await inputs[0].fill(self.config["id"])
+        if len(inputs) >= 2:
+            await inputs[1].click()
+            await inputs[1].fill(self.config["password"])
+
+        await self.page.screenshot(path="screenshots/컬리_filled.png", full_page=True)
+
+        await self.page.click("button[type='submit'], button:has-text('로그인'), button:has-text('Login')")
+        await self.page.wait_for_load_state("networkidle", timeout=20000)
         await self.page.screenshot(path="screenshots/컬리_after_login.png", full_page=True)
 
     async def get_orders(self):
