@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ExternalLink } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
+import { ExternalLink, RefreshCw } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CHANNEL_STATUS_DATA, type ChannelStatus } from "@/constants/omsMockData";
@@ -94,21 +94,26 @@ export function ChannelStatusGrid() {
   const [updatedAt, setUpdatedAt] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchChannelOverrides().then((overrides) => {
-      if (Object.keys(overrides).length > 0) {
-        setChannels(applyOverrides(CHANNEL_STATUS_DATA, overrides));
-      }
-      setLoading(false);
-    });
-
-    fetch("https://raw.githubusercontent.com/thebreadblue/channel-dashboard/main/data/results.json", {
-      cache: "no-store",
-    })
-      .then((r) => r.json())
-      .then((d) => setUpdatedAt(d.updated_at ?? ""))
-      .catch(() => {});
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    const [overrides, raw] = await Promise.all([
+      fetchChannelOverrides(),
+      fetch("https://raw.githubusercontent.com/thebreadblue/channel-dashboard/main/data/results.json", {
+        cache: "no-store",
+      })
+        .then((r) => r.json())
+        .catch(() => null),
+    ]);
+    if (Object.keys(overrides).length > 0) {
+      setChannels(applyOverrides(CHANNEL_STATUS_DATA, overrides));
+    }
+    if (raw?.updated_at) setUpdatedAt(raw.updated_at);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   const subtitle = loading
     ? "데이터 불러오는 중..."
@@ -118,9 +123,19 @@ export function ChannelStatusGrid() {
 
   return (
     <section className="space-y-4">
-      <div>
-        <h2 className="text-sm font-semibold text-slate-800">채널별 당일 현황</h2>
-        <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-sm font-semibold text-slate-800">채널별 당일 현황</h2>
+          <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>
+        </div>
+        <button
+          onClick={refresh}
+          disabled={loading}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 bg-white border border-slate-200 rounded-md hover:bg-slate-50 hover:border-slate-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <RefreshCw className={`w-3 h-3 ${loading ? "animate-spin" : ""}`} />
+          새로고침
+        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
