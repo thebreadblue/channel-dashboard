@@ -26,7 +26,7 @@ class BaeminScraper(BaseScraper):
         await self.apply_date_filter()
         await self.screenshot("orders")
 
-        count = await self.safe_int(".total-count, .count strong, [class*='count']")
+        count = await self.count_from_page(".total-count, .count strong, [class*='count']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
@@ -45,7 +45,7 @@ class BaeminScraper(BaseScraper):
         await self.page.wait_for_timeout(2000)
         await self.apply_date_filter()
 
-        count = await self.safe_int(".total-count, [class*='count']")
+        count = await self.count_from_page(".total-count, [class*='count']")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
@@ -63,7 +63,7 @@ class BaeminScraper(BaseScraper):
         await self.page.wait_for_timeout(2000)
         await self.apply_date_filter()
 
-        count = await self.safe_int(".total-count, [class*='count']")
+        count = await self.count_from_page(".total-count, [class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:

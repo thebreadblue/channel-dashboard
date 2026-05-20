@@ -44,7 +44,7 @@ class TossScraper(BaseScraper):
         await self.apply_date_filter()
         await self.screenshot("orders")
 
-        count = await self.safe_int("[class*='count'], [class*='badge']")
+        count = await self.count_from_page("[class*='count'], [class*='badge']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
@@ -63,7 +63,7 @@ class TossScraper(BaseScraper):
         await self.page.wait_for_timeout(3000)
         await self.apply_date_filter()
 
-        count = await self.safe_int("[class*='count']")
+        count = await self.count_from_page("[class*='count']")
         self.result["summary"]["inquiries_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
@@ -81,7 +81,7 @@ class TossScraper(BaseScraper):
         await self.page.wait_for_timeout(3000)
         await self.apply_date_filter()
 
-        count = await self.safe_int("[class*='count']")
+        count = await self.count_from_page("[class*='count']")
         self.result["summary"]["reviews_unanswered"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:

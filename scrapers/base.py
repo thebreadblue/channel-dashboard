@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import datetime, timezone, timedelta
 from abc import ABC, abstractmethod
 
@@ -68,7 +69,7 @@ class BaseScraper(ABC):
             el = await self.page.query_selector(sel)
             if el:
                 await el.click()
-                await self.page.wait_for_timeout(2000)
+                await self.page.wait_for_timeout(3000)
                 break
 
     async def screenshot(self, tag: str):
@@ -135,3 +136,26 @@ class BaseScraper(ABC):
         text = await self.safe_text(selector)
         digits = "".join(c for c in text if c.isdigit())
         return int(digits) if digits else default
+
+    async def count_from_page(self, css_selector: str = "") -> int:
+        """CSS 셀렉터 시도 → 0이면 페이지 텍스트에서 '총 N건' 패턴으로 재시도"""
+        if css_selector:
+            val = await self.safe_int(css_selector)
+            if val > 0:
+                return val
+
+        try:
+            text = await self.page.evaluate("() => document.body.innerText")
+            for pattern in [
+                r"총\s*([\d,]+)\s*건",
+                r"전체\s*([\d,]+)\s*건",
+                r"검색결과\s*([\d,]+)",
+                r"([\d,]+)\s*건",
+            ]:
+                m = re.search(pattern, text)
+                if m:
+                    return int(m.group(1).replace(",", ""))
+        except Exception:
+            pass
+
+        return 0
