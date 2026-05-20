@@ -138,23 +138,39 @@ class BaseScraper(ABC):
         return int(digits) if digits else default
 
     async def count_from_page(self, css_selector: str = "") -> int:
-        """CSS 셀렉터 시도 → 0이면 페이지 텍스트에서 '총 N건' 패턴으로 재시도"""
+        """CSS 셀렉터 → 페이지 텍스트 패턴 → tbody 행 수 순으로 카운트 추출"""
+        # 1. CSS 셀렉터
         if css_selector:
             val = await self.safe_int(css_selector)
             if val > 0:
                 return val
 
+        # 2. 페이지 텍스트 패턴 ('N건씩 보기' 같은 UI 텍스트 제외하기 위해 '총/전체' prefix 우선)
         try:
             text = await self.page.evaluate("() => document.body.innerText")
+            print(f"  [count_debug:{self.name}] url={self.page.url[:80]}")
+            print(f"  [count_debug:{self.name}] text_sample={text[:300]!r}")
             for pattern in [
                 r"총\s*([\d,]+)\s*건",
                 r"전체\s*([\d,]+)\s*건",
                 r"검색결과\s*([\d,]+)",
-                r"([\d,]+)\s*건",
+                r"검색 결과\s*([\d,]+)",
             ]:
                 m = re.search(pattern, text)
                 if m:
-                    return int(m.group(1).replace(",", ""))
+                    val = int(m.group(1).replace(",", ""))
+                    print(f"  [count_debug:{self.name}] matched pattern={pattern!r} → {val}")
+                    return val
+        except Exception as e:
+            print(f"  [count_debug:{self.name}] evaluate error: {e}")
+
+        # 3. tbody 행 수 (마지막 수단)
+        try:
+            rows = await self.page.query_selector_all("tbody tr")
+            n = len(rows)
+            print(f"  [count_debug:{self.name}] tbody rows={n}")
+            if n > 0:
+                return n
         except Exception:
             pass
 
