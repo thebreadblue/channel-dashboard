@@ -1,16 +1,34 @@
+import os
+import json
+import base64
 from .base import BaseScraper
 
 
 class SmartstoreScraper(BaseScraper):
     async def login(self):
+        # 쿠키 인증 우선 (Naver 봇 차단 우회)
+        cookies_b64 = os.environ.get("SMARTSTORE_COOKIES", "")
+        if cookies_b64:
+            try:
+                cookies = json.loads(base64.b64decode(cookies_b64).decode())
+                await self.page.context.add_cookies(cookies)
+                await self.page.goto("https://sell.smartstore.naver.com/#/home/dashboard")
+                await self.page.wait_for_load_state("domcontentloaded")
+                await self.page.wait_for_timeout(2000)
+                if "#/home/about" not in self.page.url:
+                    print(f"[스마트스토어] 쿠키 로그인 성공")
+                    return
+                print("[스마트스토어] 쿠키 만료 — ID/PW 로그인 시도")
+            except Exception as e:
+                print(f"[스마트스토어] 쿠키 로드 실패: {e}")
+
+        # 폴백: ID/PW 로그인
         await self.page.goto("https://nid.naver.com/nidlogin.login?url=https://sell.smartstore.naver.com")
         await self.page.wait_for_load_state("domcontentloaded")
-
         await self.page.fill("#id", self.config["id"])
         await self.page.fill("#pw", self.config["password"])
         await self.page.click(".btn_login")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
-
         try:
             skip = await self.page.query_selector("a.btn_cancel, button.btn_skip")
             if skip:
