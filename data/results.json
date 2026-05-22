@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-05-22T19:39:49.819627+09:00",
+  "updated_at": "2026-05-23T02:33:56.447787+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:35:57.271782+09:00",
+      "updated_at": "2026-05-23T02:30:16.189544+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -21,7 +21,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:36:15.860110+09:00",
+      "updated_at": "2026-05-23T02:30:35.984669+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -36,7 +36,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:36:37.417729+09:00",
+      "updated_at": "2026-05-23T02:30:55.900636+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -51,7 +51,7 @@
       "url": "http://soffice.11st.co.kr/view/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:38:01.332127+09:00",
+      "updated_at": "2026-05-23T02:32:13.574330+09:00",
       "summary": {
         "orders_new": 2,
         "inquiries_unanswered": 2,
@@ -99,7 +99,7 @@
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:38:17.050795+09:00",
+      "updated_at": "2026-05-23T02:32:28.779059+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -114,7 +114,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:38:45.241105+09:00",
+      "updated_at": "2026-05-23T02:32:55.424857+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -129,7 +129,7 @@
       "url": "https://scm-mart.baemin.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-22T19:39:08.204590+09:00",
+      "updated_at": "2026-05-23T02:33:14.984641+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -144,7 +144,7 @@
       "url": "https://supplier.coupang.com",
       "status": "error",
       "error": "쿠팡 WAF(Akamai) IP 차단 - GitHub Actions에서 자동 로그인 불가. 어드민에서 직접 확인하세요.",
-      "updated_at": "2026-05-22T19:39:08.275305+09:00",
+      "updated_at": "2026-05-23T02:33:15.063389+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -159,7 +159,7 @@
       "url": "https://partner.kurly.com",
       "status": "error",
       "error": "ElementHandle.click: Timeout 30000ms exceeded.\nCall log:\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  2 × retrying click action\n      - waiting 100ms\n      - waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  14 × retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  - retrying click action\n    - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  - retrying click action\n    - waiting 500ms\n",
-      "updated_at": "2026-05-22T19:39:49.781220+09:00",
+      "updated_at": "2026-05-23T02:33:56.390346+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
