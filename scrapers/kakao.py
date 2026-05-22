@@ -1,8 +1,27 @@
+import os
+import json
+import base64
 from .base import BaseScraper
 
 
 class KakaoScraper(BaseScraper):
     async def login(self):
+        # 쿠키 인증 우선
+        cookies_b64 = os.environ.get("KAKAO_COOKIES", "")
+        if cookies_b64:
+            try:
+                cookies = json.loads(base64.b64decode(cookies_b64).decode())
+                await self.page.context.add_cookies(cookies)
+                await self.page.goto("https://shopping-sell.kakao.com/hub")
+                await self.page.wait_for_load_state("domcontentloaded")
+                await self.page.wait_for_timeout(2000)
+                if "login" not in self.page.url and "accounts" not in self.page.url:
+                    print("[카카오] 쿠키 로그인 성공")
+                    return
+                print("[카카오] 쿠키 만료 — ID/PW 로그인 시도")
+            except Exception as e:
+                print(f"[카카오] 쿠키 로드 실패: {e}")
+
         await self.page.goto("https://accounts.kakao.com/login?continue=https%3A%2F%2Fshopping-sell.kakao.com%2Fhub")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
@@ -23,33 +42,25 @@ class KakaoScraper(BaseScraper):
 
         count = await self.count_from_page("[class*='totalCount'], [class*='total-count'], .count")
         self.result["summary"]["orders_new"] = count
-        rows = await self.page.query_selector_all("tbody tr")
-        for row in rows[:10]:
-            cells = await row.query_selector_all("td")
-            if len(cells) >= 3:
-                self.result["orders"].append({
-                    "order_no": (await cells[0].inner_text()).strip(),
-                    "product": (await cells[1].inner_text()).strip(),
-                    "status": "신규주문",
-                })
 
     async def get_inquiries(self):
         today = self.today_kst()
+
+        # 카카오쇼핑 상품 문의
         await self.page.goto(f"https://shopping-sell.kakao.com/inquiry/list?startDate={today}&endDate={today}")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
         await self.page.wait_for_timeout(2000)
         await self.apply_date_filter()
 
-        count = await self.count_from_page("[class*='totalCount'], [class*='total-count']")
-        self.result["summary"]["inquiries_unanswered"] = count
-        rows = await self.page.query_selector_all("tbody tr")
-        for row in rows[:10]:
-            cells = await row.query_selector_all("td")
-            if len(cells) >= 2:
-                self.result["inquiries"].append({
-                    "content": (await cells[1].inner_text()).strip()[:100],
-                    "status": "미답변",
-                })
+        inquiry_count = await self.count_from_page("[class*='totalCount'], [class*='total-count']")
+        self.result["summary"]["inquiries_unanswered"] = inquiry_count
+
+        # 카카오 채널(플친) 미답변 채팅
+        await self.page.goto("https://bizmessage.kakao.com/chat/list")
+        await self.page.wait_for_load_state("networkidle", timeout=15000)
+        await self.page.wait_for_timeout(2000)
+        pluschat_count = await self.count_from_page("[class*='unread'], [class*='badge'], .count-badge")
+        self.result["summary"]["pluschat_unanswered"] = pluschat_count
 
     async def get_reviews(self):
         today = self.today_kst()
@@ -60,11 +71,3 @@ class KakaoScraper(BaseScraper):
 
         count = await self.count_from_page("[class*='totalCount'], [class*='total-count']")
         self.result["summary"]["reviews_unanswered"] = count
-        rows = await self.page.query_selector_all("tbody tr")
-        for row in rows[:10]:
-            cells = await row.query_selector_all("td")
-            if len(cells) >= 2:
-                self.result["reviews"].append({
-                    "content": (await cells[1].inner_text()).strip()[:100],
-                    "status": "미답변",
-                })

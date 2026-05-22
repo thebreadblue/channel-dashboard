@@ -11,9 +11,8 @@ from scrapers.toss import TossScraper
 from scrapers.eleven import ElevenStreetScraper
 from scrapers.gmarket import GmarketScraper
 from scrapers.aliexpress import AliexpressScraper
-from scrapers.baemin import BaeminScraper
-from scrapers.coupang import CoupangScraper
-from scrapers.kurly import KurlyScraper
+from scrapers.wadiz import WadizScraper
+from scrapers.oasis import OasisScraper
 
 KST = timezone(timedelta(hours=9))
 
@@ -33,11 +32,11 @@ CHANNELS = [
         "password": os.environ.get("KAKAO_PW", ""),
     },
     {
-        "scraper": TossScraper,
-        "name": "토스쇼핑",
-        "url": "https://shopping-seller.toss.im/home",
-        "id": os.environ.get("TOSS_ID", ""),
-        "password": os.environ.get("TOSS_PW", ""),
+        "scraper": GmarketScraper,
+        "name": "G마켓(ESM+)",
+        "url": "https://www.esmplus.com/Home",
+        "id": os.environ.get("GMARKET_ID", ""),
+        "password": os.environ.get("GMARKET_PW", ""),
     },
     {
         "scraper": ElevenStreetScraper,
@@ -47,11 +46,18 @@ CHANNELS = [
         "password": os.environ.get("ELEVEN_PW", ""),
     },
     {
-        "scraper": GmarketScraper,
-        "name": "G마켓(ESM+)",
-        "url": "https://www.esmplus.com/Home",
-        "id": os.environ.get("GMARKET_ID", ""),
-        "password": os.environ.get("GMARKET_PW", ""),
+        "scraper": TossScraper,
+        "name": "토스쇼핑",
+        "url": "https://shopping-seller.toss.im/home",
+        "id": os.environ.get("TOSS_ID", ""),
+        "password": os.environ.get("TOSS_PW", ""),
+    },
+    {
+        "scraper": WadizScraper,
+        "name": "와디즈",
+        "url": "https://www.wadiz.kr/web/main",
+        "id": os.environ.get("WADIZ_ID", ""),
+        "password": os.environ.get("WADIZ_PW", ""),
     },
     {
         "scraper": AliexpressScraper,
@@ -61,25 +67,11 @@ CHANNELS = [
         "password": os.environ.get("ALIEXPRESS_PW", ""),
     },
     {
-        "scraper": BaeminScraper,
-        "name": "배민",
-        "url": "https://scm-mart.baemin.com",
-        "id": os.environ.get("BAEMIN_ID", ""),
-        "password": os.environ.get("BAEMIN_PW", ""),
-    },
-    {
-        "scraper": CoupangScraper,
-        "name": "쿠팡",
-        "url": "https://supplier.coupang.com",
-        "id": os.environ.get("COUPANG_ID", ""),
-        "password": os.environ.get("COUPANG_PW", ""),
-    },
-    {
-        "scraper": KurlyScraper,
-        "name": "컬리",
-        "url": "https://partner.kurly.com",
-        "id": os.environ.get("KURLY_ID", ""),
-        "password": os.environ.get("KURLY_PW", ""),
+        "scraper": OasisScraper,
+        "name": "오아이스",
+        "url": "https://www.oasis.co.kr:9886/order/seller/list",
+        "id": os.environ.get("OASIS_ID", ""),
+        "password": os.environ.get("OASIS_PW", ""),
     },
 ]
 

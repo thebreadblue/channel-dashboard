@@ -6,12 +6,12 @@
 사용법:
   python export_cookies.py smartstore
   python export_cookies.py kakao
-  python export_cookies.py toss
-  python export_cookies.py eleven
   python export_cookies.py gmarket
+  python export_cookies.py eleven
+  python export_cookies.py toss
+  python export_cookies.py wadiz
   python export_cookies.py ali
-  python export_cookies.py baemin
-  python export_cookies.py kurly
+  python export_cookies.py oasis
 """
 import asyncio
 import json
@@ -22,12 +22,12 @@ from playwright.async_api import async_playwright
 CHANNELS = {
     "smartstore": ("https://sell.smartstore.naver.com", "SMARTSTORE_COOKIES"),
     "kakao":       ("https://shopping-sell.kakao.com/hub", "KAKAO_COOKIES"),
-    "toss":        ("https://shopping-seller.toss.im", "TOSS_COOKIES"),
-    "eleven":      ("http://soffice.11st.co.kr/view/main", "ELEVEN_COOKIES"),
     "gmarket":     ("https://www.esmplus.com/Home", "GMARKET_COOKIES"),
+    "eleven":      ("http://soffice.11st.co.kr/view/main", "ELEVEN_COOKIES"),
+    "toss":        ("https://shopping-seller.toss.im", "TOSS_COOKIES"),
+    "wadiz":       ("https://www.wadiz.kr/web/main", "WADIZ_COOKIES"),
     "ali":         ("https://sell.aliexpress.com", "ALI_COOKIES"),
-    "baemin":      ("https://scm-mart.baemin.com", "BAEMIN_COOKIES"),
-    "kurly":       ("https://partner.kurly.com", "KURLY_COOKIES"),
+    "oasis":       ("https://www.oasis.co.kr:9886/order/seller/list", "OASIS_COOKIES"),
 }
 
 async def main():

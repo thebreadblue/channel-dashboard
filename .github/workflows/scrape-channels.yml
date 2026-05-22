@@ -25,31 +25,47 @@ jobs:
           cache: pip
 
       - name: 패키지 설치
-        run: pip install playwright
+        run: pip install -r requirements.txt
 
       - name: Playwright 브라우저 설치
         run: playwright install chromium --with-deps
 
       - name: 판매채널 스크래핑 실행
         env:
+          # 스마트스토어
           SMARTSTORE_ID: ${{ secrets.SMARTSTORE_ID }}
           SMARTSTORE_PW: ${{ secrets.SMARTSTORE_PW }}
+          SMARTSTORE_COOKIES: ${{ secrets.SMARTSTORE_COOKIES }}
+          SMARTSTORE_CLIENT_ID: ${{ secrets.SMARTSTORE_CLIENT_ID }}
+          SMARTSTORE_CLIENT_SECRET: ${{ secrets.SMARTSTORE_CLIENT_SECRET }}
+          # 카카오
           KAKAO_ID: ${{ secrets.KAKAO_ID }}
           KAKAO_PW: ${{ secrets.KAKAO_PW }}
-          TOSS_ID: ${{ secrets.TOSS_ID }}
-          TOSS_PW: ${{ secrets.TOSS_PW }}
-          ELEVEN_ID: ${{ secrets.ELEVEN_ID }}
-          ELEVEN_PW: ${{ secrets.ELEVEN_PW }}
+          KAKAO_COOKIES: ${{ secrets.KAKAO_COOKIES }}
+          # ESM+
           GMARKET_ID: ${{ secrets.GMARKET_ID }}
           GMARKET_PW: ${{ secrets.GMARKET_PW }}
+          GMARKET_COOKIES: ${{ secrets.GMARKET_COOKIES }}
+          # 11번가
+          ELEVEN_ID: ${{ secrets.ELEVEN_ID }}
+          ELEVEN_PW: ${{ secrets.ELEVEN_PW }}
+          ELEVEN_COOKIES: ${{ secrets.ELEVEN_COOKIES }}
+          # 토스쇼핑
+          TOSS_ID: ${{ secrets.TOSS_ID }}
+          TOSS_PW: ${{ secrets.TOSS_PW }}
+          TOSS_COOKIES: ${{ secrets.TOSS_COOKIES }}
+          # 와디즈
+          WADIZ_ID: ${{ secrets.WADIZ_ID }}
+          WADIZ_PW: ${{ secrets.WADIZ_PW }}
+          WADIZ_COOKIES: ${{ secrets.WADIZ_COOKIES }}
+          # 알리익스프레스
           ALIEXPRESS_ID: ${{ secrets.ALIEXPRESS_ID }}
           ALIEXPRESS_PW: ${{ secrets.ALIEXPRESS_PW }}
-          BAEMIN_ID: ${{ secrets.BAEMIN_ID }}
-          BAEMIN_PW: ${{ secrets.BAEMIN_PW }}
-          COUPANG_ID: ${{ secrets.COUPANG_ID }}
-          COUPANG_PW: ${{ secrets.COUPANG_PW }}
-          KURLY_ID: ${{ secrets.KURLY_ID }}
-          KURLY_PW: ${{ secrets.KURLY_PW }}
+          ALI_COOKIES: ${{ secrets.ALI_COOKIES }}
+          # 오아이스
+          OASIS_ID: ${{ secrets.OASIS_ID }}
+          OASIS_PW: ${{ secrets.OASIS_PW }}
+          OASIS_COOKIES: ${{ secrets.OASIS_COOKIES }}
         run: python main.py
 
       - name: 오류 스크린샷 업로드
