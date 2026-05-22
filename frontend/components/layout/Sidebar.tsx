@@ -6,7 +6,7 @@ import { LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/channel-dashboard", label: "대시보드", icon: LayoutDashboard },
+  { href: "/", label: "대시보드", icon: LayoutDashboard },
 ];
 
 export function Sidebar() {

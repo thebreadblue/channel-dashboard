@@ -33,9 +33,10 @@ function StatPill({
 function ChannelCard({ ch }: { ch: ChannelStatus }) {
   const totalInquiries = ch.inquiries.reduce((s, i) => s + i.count, 0);
   const initial = ch.name.replace(/[^가-힣A-Za-z0-9]/g, "")[0] ?? "?";
+  const isError = ch.inquiries.some((i) => i.type === "수집오류");
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className={`transition-shadow ${isError ? "border-slate-200 bg-slate-50 opacity-50" : "hover:shadow-md"}`}>
       <CardContent className="p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
