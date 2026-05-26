@@ -48,7 +48,7 @@ class BaseScraper(ABC):
         ]:
             el = await self.page.query_selector(sel)
             if el:
-                await el.triple_click()
+                await el.click(click_count=3)
                 await el.fill(today)
                 break
 
@@ -59,7 +59,7 @@ class BaseScraper(ABC):
         ]:
             el = await self.page.query_selector(sel)
             if el:
-                await el.triple_click()
+                await el.click(click_count=3)
                 await el.fill(today)
                 break
 
