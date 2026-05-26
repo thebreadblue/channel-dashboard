@@ -3,6 +3,9 @@ from .base import BaseScraper
 
 class AliexpressScraper(BaseScraper):
     async def login(self):
+        if await self.try_cookie_login("ALI_COOKIES", "https://sell.aliexpress.com", fail_if_url_contains="login.aliexpress"):
+            return
+
         await self.page.goto("https://login.aliexpress.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(3000)

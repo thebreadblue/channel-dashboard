@@ -20,6 +20,9 @@ class TossScraper(BaseScraper):
         )
 
     async def login(self):
+        if await self.try_cookie_login("TOSS_COOKIES", "https://shopping-seller.toss.im/home"):
+            return
+
         await self.page.goto("https://shopping-seller.toss.im/login")
         await self.page.wait_for_load_state("load")
         await self.page.wait_for_timeout(3000)

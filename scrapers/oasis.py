@@ -5,6 +5,9 @@ SELLER_BASE = "https://www.oasis.co.kr:9886"
 
 class OasisScraper(BaseScraper):
     async def login(self):
+        if await self.try_cookie_login("OASIS_COOKIES", f"{SELLER_BASE}/order/seller/list"):
+            return
+
         await self.page.goto(f"{SELLER_BASE}/login")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)

@@ -3,6 +3,9 @@ from .base import BaseScraper
 
 class WadizScraper(BaseScraper):
     async def login(self):
+        if await self.try_cookie_login("WADIZ_COOKIES", "https://www.wadiz.kr/web/main"):
+            return
+
         await self.page.goto("https://www.wadiz.kr/web/main")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(1500)

@@ -3,6 +3,9 @@ from .base import BaseScraper
 
 class GmarketScraper(BaseScraper):
     async def login(self):
+        if await self.try_cookie_login("GMARKET_COOKIES", "https://www.esmplus.com/Home"):
+            return
+
         await self.page.goto("https://www.esmplus.com/")
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)

@@ -1,5 +1,7 @@
 import os
 import re
+import json
+import base64
 from datetime import datetime, timezone, timedelta
 from abc import ABC, abstractmethod
 
@@ -71,6 +73,27 @@ class BaseScraper(ABC):
                 await el.click()
                 await self.page.wait_for_timeout(3000)
                 break
+
+    async def try_cookie_login(self, env_key: str, target_url: str, fail_if_url_contains: str = "login") -> bool:
+        """쿠키로 로그인 시도. 성공하면 True, 실패/쿠키 없으면 False."""
+        cookies_b64 = os.environ.get(env_key, "")
+        if not cookies_b64:
+            return False
+        try:
+            cookies = json.loads(base64.b64decode(cookies_b64).decode())
+            await self.page.context.add_cookies(cookies)
+            await self.page.goto(target_url)
+            await self.page.wait_for_load_state("domcontentloaded")
+            await self.page.wait_for_timeout(2000)
+            url = self.page.url.lower()
+            if fail_if_url_contains and fail_if_url_contains in url:
+                print(f"[{self.name}] 쿠키 만료 → ID/PW 폴백")
+                return False
+            print(f"[{self.name}] 쿠키 로그인 성공")
+            return True
+        except Exception as e:
+            print(f"[{self.name}] 쿠키 로드 실패: {e}")
+            return False
 
     async def screenshot(self, tag: str):
         """디버그 스크린샷 저장"""

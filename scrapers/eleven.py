@@ -3,6 +3,9 @@ from .base import BaseScraper
 
 class ElevenStreetScraper(BaseScraper):
     async def login(self):
+        if await self.try_cookie_login("ELEVEN_COOKIES", "http://soffice.11st.co.kr/view/main"):
+            return
+
         await self.page.goto("https://soffice.11st.co.kr/view/login", timeout=60000)
         await self.page.wait_for_load_state("domcontentloaded")
         await self.page.wait_for_timeout(2000)
