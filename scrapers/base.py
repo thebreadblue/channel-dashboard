@@ -48,8 +48,11 @@ class BaseScraper(ABC):
         ]:
             el = await self.page.query_selector(sel)
             if el:
-                await el.click(click_count=3)
-                await el.fill(today)
+                try:
+                    await el.click(click_count=3)
+                    await el.fill(today, timeout=5000)
+                except Exception:
+                    pass
                 break
 
         # 종료 날짜 (시작과 별도 필드인 경우)
@@ -59,8 +62,11 @@ class BaseScraper(ABC):
         ]:
             el = await self.page.query_selector(sel)
             if el:
-                await el.click(click_count=3)
-                await el.fill(today)
+                try:
+                    await el.click(click_count=3)
+                    await el.fill(today, timeout=5000)
+                except Exception:
+                    pass
                 break
 
         # 조회/검색 버튼
@@ -70,8 +76,11 @@ class BaseScraper(ABC):
         ]:
             el = await self.page.query_selector(sel)
             if el:
-                await el.click()
-                await self.page.wait_for_timeout(3000)
+                try:
+                    await el.click()
+                    await self.page.wait_for_timeout(3000)
+                except Exception:
+                    pass
                 break
 
     async def try_cookie_login(self, env_key: str, target_url: str, fail_if_url_contains: str = "login") -> bool:
