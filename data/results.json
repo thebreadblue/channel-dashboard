@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-05-26T14:55:24.425965+09:00",
+  "updated_at": "2026-05-26T15:00:37.415236+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:52:35.267366+09:00",
+      "updated_at": "2026-05-26T14:57:37.630659+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -24,7 +24,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:52:57.265440+09:00",
+      "updated_at": "2026-05-26T14:58:02.756070+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -40,7 +40,7 @@
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:53:08.889282+09:00",
+      "updated_at": "2026-05-26T14:58:14.934645+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -55,7 +55,7 @@
       "url": "http://soffice.11st.co.kr/view/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:53:35.933514+09:00",
+      "updated_at": "2026-05-26T14:58:49.189411+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -70,7 +70,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:53:55.915734+09:00",
+      "updated_at": "2026-05-26T14:59:09.624936+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -85,7 +85,7 @@
       "url": "https://www.wadiz.kr/web/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:54:17.616536+09:00",
+      "updated_at": "2026-05-26T14:59:36.188604+09:00",
       "summary": {
         "orders_new": 6,
         "inquiries_unanswered": 6,
@@ -100,7 +100,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T14:54:43.982952+09:00",
+      "updated_at": "2026-05-26T15:00:07.086747+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -113,9 +113,9 @@
     {
       "name": "오아이스",
       "url": "https://www.oasis.co.kr:9886/order/seller/list",
-      "status": "error",
-      "error": "ElementHandle.fill: Timeout 30000ms exceeded.\nCall log:\n    - fill(\"2026-05-26\")\n  - attempting fill action\n    2 × waiting for element to be visible, enabled and editable\n      - element is not editable\n    - retrying fill action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and editable\n      - element is not editable\n    - retrying fill action\n      - waiting 100ms\n    60 × waiting for element to be visible, enabled and editable\n       - element is not editable\n     - retrying fill action\n       - waiting 500ms\n",
-      "updated_at": "2026-05-26T14:55:24.376701+09:00",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-26T15:00:37.366957+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
