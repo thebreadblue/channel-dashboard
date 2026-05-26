@@ -36,33 +36,35 @@ class WadizScraper(BaseScraper):
         await self.page.wait_for_load_state("networkidle", timeout=20000)
 
     async def get_orders(self):
-        today = self.today_kst()
-        # 와디즈 스토어 주문 관리
-        await self.page.goto(
-            f"https://biz.wadiz.kr/store/orders?startDate={today}&endDate={today}&status=NEW"
-        )
+        # 와디즈 스토어 프로젝트 목록
+        await self.page.goto("https://www.wadiz.kr/web/maker/projects?type=store")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
-        await self.page.wait_for_timeout(2000)
-        await self.apply_date_filter()
+        await self.page.wait_for_timeout(3000)
         await self.screenshot("orders")
 
-        count = await self.count_from_page("[class*='totalCount'], [class*='total'], .count strong")
+        count = await self.count_from_page(
+            "[class*='totalCount'], [class*='total-count'], [class*='count'], .badge"
+        )
         self.result["summary"]["orders_new"] = count
 
     async def get_inquiries(self):
-        # 와디즈 고객 문의
-        await self.page.goto("https://biz.wadiz.kr/store/inquiries?answered=false")
+        # 와디즈 문의 (메이커센터 고객문의)
+        await self.page.goto("https://www.wadiz.kr/web/maker/cs/inquiries")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
         await self.page.wait_for_timeout(2000)
 
-        count = await self.count_from_page("[class*='totalCount'], [class*='total'], .count strong")
+        count = await self.count_from_page(
+            "[class*='totalCount'], [class*='total-count'], [class*='count']"
+        )
         self.result["summary"]["inquiries_unanswered"] = count
 
     async def get_reviews(self):
-        # 와디즈 리뷰 미답변
-        await self.page.goto("https://biz.wadiz.kr/store/reviews?replied=false")
+        # 와디즈 리뷰
+        await self.page.goto("https://www.wadiz.kr/web/maker/cs/reviews")
         await self.page.wait_for_load_state("networkidle", timeout=15000)
         await self.page.wait_for_timeout(2000)
 
-        count = await self.count_from_page("[class*='totalCount'], [class*='total'], .count strong")
+        count = await self.count_from_page(
+            "[class*='totalCount'], [class*='total-count'], [class*='count']"
+        )
         self.result["summary"]["reviews_unanswered"] = count

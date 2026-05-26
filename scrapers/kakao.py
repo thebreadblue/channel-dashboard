@@ -46,13 +46,19 @@ class KakaoScraper(BaseScraper):
     async def get_inquiries(self):
         today = self.today_kst()
 
-        # 카카오쇼핑 상품 문의
-        await self.page.goto(f"https://shopping-sell.kakao.com/inquiry/list?startDate={today}&endDate={today}")
-        await self.page.wait_for_load_state("networkidle", timeout=15000)
-        await self.page.wait_for_timeout(2000)
-        await self.apply_date_filter()
+        # 카카오쇼핑 상품 문의 (허브에서 접근)
+        for url in [
+            f"https://shopping-sell.kakao.com/cs/inquiry?startDate={today}&endDate={today}",
+            f"https://shopping-sell.kakao.com/cs/inquiry/list?startDate={today}&endDate={today}",
+            "https://shopping-sell.kakao.com/hub",
+        ]:
+            await self.page.goto(url)
+            await self.page.wait_for_load_state("networkidle", timeout=15000)
+            await self.page.wait_for_timeout(2000)
+            if "잘못된" not in await self.page.title() and "error" not in self.page.url.lower():
+                break
 
-        inquiry_count = await self.count_from_page("[class*='totalCount'], [class*='total-count']")
+        inquiry_count = await self.count_from_page("[class*='totalCount'], [class*='total-count'], [class*='count']")
         self.result["summary"]["inquiries_unanswered"] = inquiry_count
 
         # 카카오 채널(플친) 미답변 채팅

@@ -104,11 +104,18 @@ class SmartstoreScraper(BaseScraper):
                 await self.page.context.add_cookies(cookies)
                 await self.page.goto("https://sell.smartstore.naver.com/#/home/dashboard")
                 await self.page.wait_for_load_state("domcontentloaded")
-                await self.page.wait_for_timeout(2000)
-                if "#/home/about" not in self.page.url:
-                    print(f"[스마트스토어] 쿠키 로그인 성공")
+                await self.page.wait_for_timeout(3000)
+                url = self.page.url
+                # 로그인 성공: dashboard URL이거나 about이 아닌 판매자 SPA 경로
+                is_logged_in = (
+                    "#/home/about" not in url
+                    and "sell.smartstore.naver.com" in url
+                    and "#/" in url
+                )
+                if is_logged_in:
+                    print(f"[스마트스토어] 쿠키 로그인 성공: {url}")
                     return
-                print("[스마트스토어] 쿠키 만료 — ID/PW 로그인 시도")
+                print(f"[스마트스토어] 쿠키 만료 (url={url}) — ID/PW 로그인 시도")
             except Exception as e:
                 print(f"[스마트스토어] 쿠키 로드 실패: {e}")
 

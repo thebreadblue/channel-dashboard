@@ -28,15 +28,15 @@ class GmarketScraper(BaseScraper):
     async def get_orders(self):
         today = self.today_kst()
         await self.page.goto(
-            f"https://www.esmplus.com/Deliver/DeliverList"
-            f"?OrderStatus=1&OrdBeginDt={today}&OrdEndDt={today}"
+            f"https://www.esmplus.com/Home/v2/order-integration"
+            f"?startDate={today}&endDate={today}&orderStatus=NEW"
         )
         await self.page.wait_for_load_state("networkidle", timeout=15000)
-        await self.page.wait_for_timeout(2000)
+        await self.page.wait_for_timeout(3000)
         await self.apply_date_filter()
         await self.screenshot("orders")
 
-        count = await self.count_from_page("#lblTotalCount, .count em, .total_count strong")
+        count = await self.count_from_page("#lblTotalCount, .count em, .total_count strong, [class*='totalCount']")
         self.result["summary"]["orders_new"] = count
         rows = await self.page.query_selector_all("tbody tr")
         for row in rows[:10]:
