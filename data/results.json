@@ -1,16 +1,19 @@
 {
-  "updated_at": "2026-05-26T11:35:57.027421+09:00",
+  "updated_at": "2026-05-26T14:48:34.257477+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T11:32:27.744848+09:00",
+      "updated_at": "2026-05-26T14:45:55.171283+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
-        "reviews_unanswered": 0
+        "reviews_unanswered": 0,
+        "qna_unanswered": 0,
+        "inquiry_unanswered": 0,
+        "talktalk_unanswered": 0
       },
       "orders": [],
       "inquiries": [],
@@ -21,7 +24,38 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T11:32:47.959402+09:00",
+      "updated_at": "2026-05-26T14:46:19.506157+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0,
+        "pluschat_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "G마켓(ESM+)",
+      "url": "https://www.esmplus.com/Home",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-26T14:46:31.804782+09:00",
+      "summary": {
+        "orders_new": 0,
+        "inquiries_unanswered": 0,
+        "reviews_unanswered": 0
+      },
+      "orders": [],
+      "inquiries": [],
+      "reviews": []
+    },
+    {
+      "name": "11번가",
+      "url": "http://soffice.11st.co.kr/view/main",
+      "status": "ok",
+      "error": null,
+      "updated_at": "2026-05-26T14:47:06.144929+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -36,7 +70,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T11:33:09.011465+09:00",
+      "updated_at": "2026-05-26T14:47:26.063816+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -47,30 +81,15 @@
       "reviews": []
     },
     {
-      "name": "11번가",
-      "url": "http://soffice.11st.co.kr/view/main",
-      "status": "error",
-      "error": "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://soffice.11st.co.kr/view/login\", waiting until \"load\"\n",
-      "updated_at": "2026-05-26T11:34:10.053443+09:00",
-      "summary": {
-        "orders_new": 0,
-        "inquiries_unanswered": 0,
-        "reviews_unanswered": 0
-      },
-      "orders": [],
-      "inquiries": [],
-      "reviews": []
-    },
-    {
-      "name": "G마켓(ESM+)",
-      "url": "https://www.esmplus.com/Home",
+      "name": "와디즈",
+      "url": "https://www.wadiz.kr/web/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T11:34:26.265134+09:00",
+      "updated_at": "2026-05-26T14:47:51.656819+09:00",
       "summary": {
-        "orders_new": 0,
-        "inquiries_unanswered": 0,
-        "reviews_unanswered": 0
+        "orders_new": 6,
+        "inquiries_unanswered": 6,
+        "reviews_unanswered": 6
       },
       "orders": [],
       "inquiries": [],
@@ -81,7 +100,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-05-26T11:34:54.764091+09:00",
+      "updated_at": "2026-05-26T14:48:23.107000+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -92,41 +111,11 @@
       "reviews": []
     },
     {
-      "name": "배민",
-      "url": "https://scm-mart.baemin.com",
-      "status": "ok",
-      "error": null,
-      "updated_at": "2026-05-26T11:35:14.816205+09:00",
-      "summary": {
-        "orders_new": 0,
-        "inquiries_unanswered": 0,
-        "reviews_unanswered": 0
-      },
-      "orders": [],
-      "inquiries": [],
-      "reviews": []
-    },
-    {
-      "name": "쿠팡",
-      "url": "https://supplier.coupang.com",
+      "name": "오아이스",
+      "url": "https://www.oasis.co.kr:9886/order/seller/list",
       "status": "error",
-      "error": "쿠팡 WAF(Akamai) IP 차단 - GitHub Actions에서 자동 로그인 불가. 어드민에서 직접 확인하세요.",
-      "updated_at": "2026-05-26T11:35:14.894673+09:00",
-      "summary": {
-        "orders_new": 0,
-        "inquiries_unanswered": 0,
-        "reviews_unanswered": 0
-      },
-      "orders": [],
-      "inquiries": [],
-      "reviews": []
-    },
-    {
-      "name": "컬리",
-      "url": "https://partner.kurly.com",
-      "status": "error",
-      "error": "ElementHandle.click: Timeout 30000ms exceeded.\nCall log:\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  2 × retrying click action\n      - waiting 100ms\n      - waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  14 × retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n       - waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div role=\"dialog\" id=\"__BVID__19\" aria-modal=\"true\" class=\"modal fade show\" aria-labelledby=\"__BVID__19___BV_modal_title_\" aria-describedby=\"__BVID__19___BV_modal_body_\">…</div> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  - retrying click action\n    - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - <p>ㄴ 신청 마감일(프로모션 시작일로부터 영업일 기준 D-9일) 내에 제안된 상품들에 한하여…</p> from <div id=\"__BVID__19___BV_modal_outer_\">…</div> subtree intercepts pointer events\n  - retrying click action\n    - waiting 500ms\n",
-      "updated_at": "2026-05-26T11:35:56.956537+09:00",
+      "error": "'ElementHandle' object has no attribute 'triple_click'",
+      "updated_at": "2026-05-26T14:48:34.204949+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
