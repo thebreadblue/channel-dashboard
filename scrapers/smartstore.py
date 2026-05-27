@@ -43,6 +43,8 @@ class NaverCommerceApi:
             },
             timeout=10,
         )
+        if not res.is_success:
+            print(f"[스마트스토어] 토큰 발급 실패 {res.status_code}: {res.text}")
         res.raise_for_status()
         data = res.json()
         self._token = data["access_token"]
@@ -163,6 +165,7 @@ class SmartstoreScraper(BaseScraper):
         except Exception as e:
             self.result["status"] = "error"
             self.result["error"] = str(e)
+            print(f"[스마트스토어] API 오류: {e}")
         finally:
             self.result["updated_at"] = now_kst()
         return self.result
