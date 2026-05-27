@@ -14,10 +14,12 @@ class NaverCommerceApi:
     BASE = "https://api.commerce.naver.com/external"
 
     def __init__(self, client_id: str, client_secret: str):
-        self.client_id = client_id
-        self.client_secret = client_secret
+        # 붙여넣기 시 섞이는 공백/개행 제거
+        self.client_id = client_id.strip()
+        self.client_secret = client_secret.strip()
         self._token: str | None = None
         self._token_exp: float = 0
+        print(f"[스마트스토어] client_id 길이={len(self.client_id)}, secret 길이={len(self.client_secret)}")
 
     def _sign(self, timestamp: int) -> str:
         msg = f"{self.client_id}_{timestamp}"
