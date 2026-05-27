@@ -28,7 +28,8 @@ class NaverCommerceApi:
             msg.encode("utf-8"),
             hashlib.sha256,
         ).digest()
-        return base64.b64encode(sig).decode()
+        # URL-safe base64: +→- /→_ 로 치환, 폼 전송 시 URL 인코딩 문제 방지
+        return base64.urlsafe_b64encode(sig).decode()
 
     def _ensure_token(self):
         if self._token and time.time() < self._token_exp - 60:
