@@ -2,8 +2,7 @@ import os
 import json
 import base64
 import time
-import hashlib
-import hmac
+import bcrypt
 import httpx
 from .base import BaseScraper
 
@@ -22,14 +21,11 @@ class NaverCommerceApi:
         print(f"[스마트스토어] client_id 길이={len(self.client_id)}, secret 길이={len(self.client_secret)}")
 
     def _sign(self, timestamp: int) -> str:
-        msg = f"{self.client_id}_{timestamp}"
-        sig = hmac.new(
-            self.client_secret.encode("utf-8"),
-            msg.encode("utf-8"),
-            hashlib.sha256,
-        ).digest()
-        # URL-safe base64: +→- /→_ 로 치환, 폼 전송 시 URL 인코딩 문제 방지
-        return base64.urlsafe_b64encode(sig).decode()
+        # 네이버 커머스 API: bcrypt(password, salt) → base64
+        # client_secret 자체가 bcrypt salt ($2a$04$...)
+        password = f"{self.client_id}_{timestamp}".encode("utf-8")
+        hashed = bcrypt.hashpw(password, self.client_secret.encode("utf-8"))
+        return base64.b64encode(hashed).decode("utf-8")
 
     def _ensure_token(self):
         if self._token and time.time() < self._token_exp - 60:
