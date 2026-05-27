@@ -65,6 +65,7 @@ CHANNELS = [
         "url": "https://sell.aliexpress.com",
         "id": os.environ.get("ALIEXPRESS_ID", ""),
         "password": os.environ.get("ALIEXPRESS_PW", ""),
+        "manual": True,  # 보안 정책으로 자동 수집 불가 → 수동확인
     },
     {
         "scraper": OasisScraper,
@@ -77,6 +78,21 @@ CHANNELS = [
 
 
 async def run_scraper(browser, channel_config):
+    # 수동확인 채널은 스크래핑 없이 manual 상태로 반환
+    if channel_config.get("manual"):
+        print(f"[{channel_config['name']}] 수동확인 채널 — 스킵")
+        return {
+            "name": channel_config["name"],
+            "url": channel_config["url"],
+            "status": "manual",
+            "error": None,
+            "updated_at": datetime.now(KST).isoformat(),
+            "summary": {"orders_new": 0, "inquiries_unanswered": 0, "reviews_unanswered": 0},
+            "orders": [],
+            "inquiries": [],
+            "reviews": [],
+        }
+
     ScraperClass = channel_config["scraper"]
     config = {
         "id": channel_config["id"],

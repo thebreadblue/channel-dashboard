@@ -49,6 +49,13 @@ export async function fetchChannelOverrides(): Promise<
 
       const s = ch.summary ?? {};
       const error = ch.status === "error";
+      const manual = ch.status === "manual";
+
+      // 수동확인 채널 — 셀러센터 링크만 제공, 수치 없음
+      if (manual) {
+        overrides[id] = { newOrders: 0, error: false, inquiries: { 수동확인: 1 } };
+        continue;
+      }
 
       if (id === "smartstore") {
         overrides[id] = {
@@ -94,6 +101,11 @@ export function applyOverrides(
     // 에러 시 수집오류 배지 단일 표시
     if (ov.error) {
       return { ...ch, newOrders: 0, cancelReturns: 0, inquiries: [{ type: "수집오류", count: 1 }] };
+    }
+
+    // 수동확인 채널 — 배지만 표시
+    if (ov.inquiries["수동확인"] === 1) {
+      return { ...ch, newOrders: 0, cancelReturns: 0, inquiries: [{ type: "수동확인", count: 0 }] };
     }
 
     // inquiry 타입별로 mock의 순서를 유지하면서 수치 덮어쓰기

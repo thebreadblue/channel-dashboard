@@ -34,9 +34,10 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
   const totalInquiries = ch.inquiries.reduce((s, i) => s + i.count, 0);
   const initial = ch.name.replace(/[^가-힣A-Za-z0-9]/g, "")[0] ?? "?";
   const isError = ch.inquiries.some((i) => i.type === "수집오류");
+  const isManual = ch.inquiries.some((i) => i.type === "수동확인");
 
   return (
-    <Card className={`transition-shadow ${isError ? "border-slate-200 bg-slate-50 opacity-50" : "hover:shadow-md"}`}>
+    <Card className={`transition-shadow ${isError ? "border-slate-200 bg-slate-50 opacity-50" : isManual ? "border-slate-200 bg-slate-50/60" : "hover:shadow-md"}`}>
       <CardContent className="p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -77,7 +78,9 @@ function ChannelCard({ ch }: { ch: ChannelStatus }) {
                     ? inq.type === "수집오류"
                       ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-50"
                       : "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-50"
-                    : "bg-slate-50 text-slate-400 border border-slate-100"
+                    : inq.type === "수동확인"
+                      ? "bg-slate-100 text-slate-500 border border-slate-200 hover:bg-slate-100"
+                      : "bg-slate-50 text-slate-400 border border-slate-100"
                 }`}
               >
                 {inq.type} {inq.count > 0 && <span className="ml-1 font-bold">{inq.count}</span>}
