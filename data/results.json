@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-06-09T11:07:33.308124+09:00",
+  "updated_at": "2026-06-09T11:30:07.911447+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:04:05.672833+09:00",
+      "updated_at": "2026-06-09T11:26:17.146458+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -24,7 +24,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:04:36.710571+09:00",
+      "updated_at": "2026-06-09T11:26:48.298713+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -40,7 +40,7 @@
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:04:57.473353+09:00",
+      "updated_at": "2026-06-09T11:27:09.051211+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -55,7 +55,7 @@
       "url": "http://soffice.11st.co.kr/view/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:06:09.015883+09:00",
+      "updated_at": "2026-06-09T11:28:20.628407+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -70,7 +70,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:06:24.596284+09:00",
+      "updated_at": "2026-06-09T11:28:35.704736+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -84,8 +84,8 @@
       "name": "와디즈",
       "url": "https://www.wadiz.kr/web/main",
       "status": "error",
-      "error": "Page.wait_for_selector: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"input[type='email'], input[name='email'], input[placeholder*='이메일']\") to be visible\n",
-      "updated_at": "2026-06-09T11:07:14.604168+09:00",
+      "error": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.wadiz.kr/web/main\", waiting until \"load\"\n",
+      "updated_at": "2026-06-09T11:29:48.071254+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -100,7 +100,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "manual",
       "error": null,
-      "updated_at": "2026-06-09T11:07:14.612321+09:00",
+      "updated_at": "2026-06-09T11:29:48.080838+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -115,7 +115,7 @@
       "url": "https://www.oasis.co.kr:9886/order/seller/list",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-09T11:07:33.253375+09:00",
+      "updated_at": "2026-06-09T11:30:07.861878+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
