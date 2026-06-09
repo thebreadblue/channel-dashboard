@@ -161,13 +161,11 @@ class SmartstoreScraper(BaseScraper):
             self.result["summary"]["inquiry_unanswered"] = reviews
             self.result["summary"]["inquiries_unanswered"] = qna + reviews
             self.result["status"] = "ok"
-        except Exception as e:
-            self.result["status"] = "error"
-            self.result["error"] = str(e)
-            print(f"[스마트스토어] API 오류: {e}")
-        finally:
             self.result["updated_at"] = now_kst()
-        return self.result
+            return self.result
+        except Exception as e:
+            print(f"[스마트스토어] API 오류: {e}")
+            raise
 
     async def get_orders(self):
         today = self.today_kst()
