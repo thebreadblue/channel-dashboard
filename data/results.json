@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-06-10T03:37:42.906402+09:00",
+  "updated_at": "2026-06-10T08:57:39.300418+09:00",
   "channels": [
     {
       "name": "스마트스토어",
       "url": "https://sell.smartstore.naver.com",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:34:33.465120+09:00",
+      "updated_at": "2026-06-10T08:54:42.957011+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -24,7 +24,7 @@
       "url": "https://shopping-sell.kakao.com/hub",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:35:11.499335+09:00",
+      "updated_at": "2026-06-10T08:55:19.404486+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -40,7 +40,7 @@
       "url": "https://www.esmplus.com/Home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:35:32.547352+09:00",
+      "updated_at": "2026-06-10T08:55:39.003749+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -55,7 +55,7 @@
       "url": "http://soffice.11st.co.kr/view/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:36:43.208455+09:00",
+      "updated_at": "2026-06-10T08:56:44.513756+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -70,7 +70,7 @@
       "url": "https://shopping-seller.toss.im/home",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:36:57.708679+09:00",
+      "updated_at": "2026-06-10T08:56:58.987605+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -85,7 +85,7 @@
       "url": "https://www.wadiz.kr/web/main",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:37:22.804070+09:00",
+      "updated_at": "2026-06-10T08:57:21.349366+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -100,7 +100,7 @@
       "url": "https://sell.aliexpress.com",
       "status": "manual",
       "error": null,
-      "updated_at": "2026-06-10T03:37:22.810620+09:00",
+      "updated_at": "2026-06-10T08:57:21.354968+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
@@ -115,7 +115,7 @@
       "url": "https://www.oasis.co.kr:9886/order/seller/list",
       "status": "ok",
       "error": null,
-      "updated_at": "2026-06-10T03:37:42.856668+09:00",
+      "updated_at": "2026-06-10T08:57:39.256869+09:00",
       "summary": {
         "orders_new": 0,
         "inquiries_unanswered": 0,
